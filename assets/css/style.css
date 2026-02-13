@@ -1,0 +1,285 @@
+/* Variables de color para reutilizar */
+:root {
+    --turquesa: #5db9c3;
+    --blanco: #ffffff;
+    --gris-suave: #f8f9fa;
+    --texto-oscuro: #333333;
+    --celeste-claro: #e0f2f1;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif; /* Una fuente moderna */
+}
+
+body {
+    background-color: var(--blanco);
+    color: var(--texto-oscuro);
+}
+
+.main-header {
+    background-color: var(--turquesa);
+    padding: 20px;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    color: var(--blanco);
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* Tarjetas Blancas (Delivery y Wallet) */
+.status-cards {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.card {
+    background: var(--blanco);
+    color: var(--texto-oscuro);
+    padding: 15px;
+    border-radius: 15px;
+    flex: 1; /* Para que midan lo mismo */
+    font-size: 0.8rem;
+}
+
+.container {
+    padding: 20px;
+    max-width: 1200px; /* Ancho máximo para laptops */
+    margin: 0 auto;    /* Centra el contenido en pantallas grandes */
+}
+
+/* Ajuste para pantallas grandes (Media Query) */
+@media (min-width: 768px) {
+    .status-cards {
+        max-width: 600px; /* No queremos que las tarjetas sean gigantes en PC */
+    }
+    
+    .product-list #products-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas en Tablet/Laptop */
+        gap: 20px;
+    }
+}
+
+.promo-banner {
+    position: relative;
+    width: 100%;
+    height: 150px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 20px 0;
+    background: #000; /* Fondo negro por si la imagen no carga */
+}
+
+.promo-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen sin deformarla */
+    opacity: 0.7;
+}
+
+.banner-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+}
+
+.categories {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0;
+    overflow-x: auto; /* Permite scroll horizontal en celulares */
+}
+
+.cat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 80px;
+}
+
+.cat-item i {
+    background-color: var(--celeste-claro);
+    color: var(--turquesa);
+    padding: 15px;
+    border-radius: 50%; /* Hace que sea un círculo */
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.cat-item span {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.product-card {
+    display: flex;
+    align-items: center;
+    background: var(--gris-suave);
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: transform 0.2s;
+}
+
+.product-card:hover {
+    transform: scale(1.02); /* Efecto al pasar el mouse */
+}
+
+.product-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+    object-fit: cover;
+    margin-right: 15px;
+}
+
+.product-info {
+    flex-grow: 1;
+}
+
+.sizes {
+    display: flex;
+    gap: 10px;
+    margin: 5px 0;
+}
+
+.sizes span {
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    color: var(--turquesa);
+    font-size: 1.1rem;
+}
+
+.price i {
+    background: var(--turquesa);
+    color: white;
+    padding: 8px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* Banner de Promoción */
+.promo-banner {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('../img/banner.jpg'); /* Fondo con sombra para que el texto resalte */
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    color: white;
+}
+
+/* Menú de Categorías (Iconos redondos) */
+.categories {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.cat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.7rem;
+}
+
+.cat-item i {
+    background: var(--celeste-claro);
+    color: var(--turquesa);
+    padding: 15px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.cat-item i:hover {
+    background: var(--turquesa);
+    color: white;
+}
+
+.product-card {
+    display: flex;
+    background: var(--gris-suave);
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+    align-items: center;
+    gap: 15px;
+}
+
+.product-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 15px;
+    object-fit: cover; /* Evita que la imagen se deforme */
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-info h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.sizes {
+    margin-bottom: 10px;
+}
+
+.sizes span {
+    background: white;
+    padding: 2px 8px;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 0.8rem;
+    border: 1px solid #ddd;
+}
+
+.price {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price i {
+    background: var(--turquesa);
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
+    cursor: pointer;
+}
