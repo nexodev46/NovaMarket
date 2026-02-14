@@ -44,6 +44,8 @@ async function obtenerProductos(categoriaSeleccionada = null) {
             const nombreFinal = datos.nombre || datos.Nombre || "Producto sin nombre";
             const precioFinal = datos.precio || datos.Precio || "0.00";
             const imagenFinal = datos.imagen || datos.Imagen || "https://via.placeholder.com/150";
+            
+            // Dentro del forEach de querySnapshot
 
             contenedor.innerHTML += `
             <article class="product-card">
@@ -153,6 +155,8 @@ function renderizarCarrito() {
 
     totalUI.innerText = `$${total.toFixed(2)}`;
     if(cartBadge) cartBadge.innerText = carrito.length;
+
+
 }
 
 // Lógica para detectar el clic en el botón de eliminar
@@ -226,6 +230,8 @@ function actualizarSaludo() {
 actualizarSaludo();
 obtenerProductos(); // Esta ya la tienes
 activarBuscadores(); // <--- AGREGA ESTA LÍNEA
+
+
 
 // --- FUNCIÓN DE BÚSQUEDA ACTUALIZADA ---
 function activarBuscadores() {
@@ -426,3 +432,72 @@ document.querySelector(".close-info").onclick = () => infoModal.style.display = 
 window.addEventListener('click', (e) => {
     if (e.target == infoModal) infoModal.style.display = "none";
 });
+
+
+// --- LÓGICA DEL BOTÓN PROMO ---
+const promoModal = document.getElementById("promo-modal");
+const listaPromoUI = document.getElementById("promo-items-list");
+
+// 1. Buscamos el botón "Promo" entre los círculos
+const botonesCirculares = document.querySelectorAll('.cat-item');
+let botonPromoReal = null;
+
+botonesCirculares.forEach(item => {
+    if(item.innerText.includes("Promo")) {
+        botonPromoReal = item;
+    }
+});
+
+// 2. Función para mostrar productos en promoción
+async function dibujarPromociones() {
+    listaPromoUI.innerHTML = '<p style="text-align:center;">Buscando ofertas...</p>';
+    
+    try {
+        const productosRef = collection(db, "productos");
+        // Filtramos solo los que tengan categoria "Promo"
+        const q = query(productosRef, where("categoria", "==", "Promo"));
+        const querySnapshot = await getDocs(q);
+        
+        listaPromoUI.innerHTML = "";
+
+        if (querySnapshot.empty) {
+            listaPromoUI.innerHTML = "<p style='text-align:center; padding:20px;'>Próximamente nuevas ofertas. 😉</p>";
+            return;
+        }
+
+        querySnapshot.forEach((doc) => {
+            const prod = doc.data();
+            listaPromoUI.innerHTML += `
+                <div class="cart-item-row" style="border-left: 4px solid #ff4757; margin-bottom: 10px; padding-left: 10px;">
+                    <div class="cart-item-info">
+                        <span style="font-weight:bold; color:#333;">${prod.nombre}</span>
+                        <strong style="color:#ff4757;">$${prod.precio} <small style="text-decoration:line-through; color:#aaa; font-weight:normal;">$${(parseFloat(prod.precio) * 1.2).toFixed(2)}</small></strong>
+                    </div>
+                    <button class="add-btn-promo" onclick="agregarDesdePromo('${prod.nombre}', '${prod.precio}')" 
+                            style="background:#4dbbc4; color:white; border:none; border-radius:5px; padding:5px 10px; cursor:pointer;">
+                        +
+                    </button>
+                </div>
+            `;
+        });
+    } catch (error) {
+        console.error("Error al cargar promos:", error);
+    }
+}
+
+// 3. Eventos de Abrir y Cerrar
+if (botonPromoReal) {
+    botonPromoReal.onclick = function() {
+        dibujarPromociones();
+        promoModal.style.display = "block";
+    };
+}
+
+document.querySelector(".close-promo").onclick = () => promoModal.style.display = "none";
+
+// 4. Función para agregar al carrito directo desde la pestaña de Promo
+window.agregarDesdePromo = function(nombre, precio) {
+    carrito.push({ nombre, precio: "$" + precio });
+    if(cartBadge) cartBadge.innerText = carrito.length;
+    mostrarMensajeAgregado(nombre);
+};

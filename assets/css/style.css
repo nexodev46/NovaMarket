@@ -630,3 +630,16 @@ body {
     from { opacity: 1; bottom: 30px; }
     to { opacity: 0; bottom: 0; }
 }
+
+
+
+.add-btn-promo:active {
+    transform: scale(0.9);
+    background-color: #3aa8b0;
+}
+
+#promo-items-list strong {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
