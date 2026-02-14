@@ -102,6 +102,9 @@ contenedor.addEventListener('click', (e) => {
         };
 
         carrito.push(producto);
+
+        // AQUÍ ES EL LUGAR PERFECTO:
+        mostrarMensajeAgregado(producto.nombre);
         
         // Actualizar contador visual
         if(cartBadge) cartBadge.innerText = carrito.length;
@@ -119,6 +122,8 @@ contenedor.addEventListener('click', (e) => {
 btnAbrirModal.onclick = function() {
     renderizarCarrito();
     modal.style.display = "block";
+  // >>> AQUÍ ES DONDE VA, FUERA DE RENDERIZAR <<<
+
 }
 
 // Función separada para poder redibujar la lista si borramos algo
@@ -139,7 +144,9 @@ function renderizarCarrito() {
                 </div>
                 <button class="delete-item" data-index="${index}">&times;</button>
             </div>
+
         `;
+
         const precioLimpio = prod.precio.replace('$', '').replace(',', '');
         total += parseFloat(precioLimpio);
     });
@@ -330,3 +337,21 @@ window.borrarDeFavs = function(n) {
     dibujarFavoritos();
     if(typeof marcarFavoritosGuardados === 'function') marcarFavoritosGuardados();
 };
+
+
+
+
+function mostrarMensajeAgregado(nombreProducto) {
+    // 1. Creamos el elemento
+    const toast = document.createElement('div');
+    toast.className = 'toast-notificacion';
+    toast.innerHTML = `<i class="fas fa-check-circle"></i> ${nombreProducto} agregado al pedido`;
+
+    // 2. Lo metemos a la página
+    document.body.appendChild(toast);
+
+    // 3. Lo borramos del código después de 3 segundos para no llenar la web de basura
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
