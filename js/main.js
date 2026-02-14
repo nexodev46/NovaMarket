@@ -9,7 +9,8 @@ const contenedor = document.getElementById('products-container');
 async function obtenerProductos() {
     try {
         // Mensaje de carga inicial
-        contenedor.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">Cargando deliciosos jugos...</p>';
+        // Busca esta línea y cámbiala:
+contenedor.innerHTML = '<div class="loader"></div>';
         
         const querySnapshot = await getDocs(collection(db, "productos"));
         
