@@ -28,9 +28,9 @@
         <div class="user-avatar">
             <i class="fas fa-user-circle"></i> </div>
     </div>
-    <div class="cart-container">
-        <i class="fas fa-shopping-cart cart-icon"></i>
-        <span class="cart-badge">0</span> </div>
+    <div class="cart-container" style="cursor: pointer;">
+    <i class="fas fa-shopping-cart cart-icon"></i>
+    <span class="cart-badge">0</span>
 </div>
         </div>
     </nav>
@@ -79,5 +79,26 @@
     </main>
 
     <script type="module" src="js/main.js"></script>
+
+   <div id="cart-modal" class="cart-modal">
+    <div class="cart-modal-content">
+        <div class="cart-modal-header">
+            <h3>Mi Pedido</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div id="cart-items-list" class="cart-items-list">
+            </div>
+        <div class="cart-modal-footer">
+            <div class="total-container">
+                <span>Total:</span>
+                <span id="cart-total-amount">$0.00</span>
+            </div>
+            <button id="btn-whatsapp-send" class="btn-whatsapp-send">
+                <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+            </button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

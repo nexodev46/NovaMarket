@@ -1,19 +1,29 @@
-// 1. Importamos la base de datos y las funciones de Firestore (Añadimos query y where)
+// 1. Importamos la base de datos y las funciones de Firestore
 import { db } from './firebase.js';
 import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const contenedor = document.getElementById('products-container');
 
-// 3. Función principal para cargar productos (Ahora recibe una categoría opcional)
+// --- VARIABLES GLOBALES (Solo una vez) ---
+let carrito = [];
+const miTelefono = "916992293"; // Tu número real aquí
+const cartBadge = document.querySelector('.cart-badge');
+
+// Elementos del Modal
+const modal = document.getElementById("cart-modal");
+const btnAbrirModal = document.querySelector(".cart-container");
+const btnCerrarModal = document.querySelector(".close-modal");
+const listaCarritoUI = document.getElementById("cart-items-list");
+const totalUI = document.getElementById("cart-total-amount");
+
+// 3. Función principal para cargar productos
 async function obtenerProductos(categoriaSeleccionada = null) {
     try {
-        // Mensaje de carga inicial con tu loader
         contenedor.innerHTML = '<div class="loader"></div>';
         
         let q;
         const productosRef = collection(db, "productos");
 
-        // LÓGICA DE FILTRO: Si hay categoría, filtramos; si no, traemos todo
         if (categoriaSeleccionada) {
             q = query(productosRef, where("categoria", "==", categoriaSeleccionada));
         } else {
@@ -21,11 +31,8 @@ async function obtenerProductos(categoriaSeleccionada = null) {
         }
         
         const querySnapshot = await getDocs(q);
-        
-        // Limpiamos el contenedor para meter los datos reales
         contenedor.innerHTML = '';
 
-        // Si la categoría está vacía en Firebase, avisamos al usuario
         if (querySnapshot.empty) {
             contenedor.innerHTML = '<p style="grid-column: 1/-1; text-align: center;">No hay productos en esta categoría.</p>';
             return;
@@ -33,13 +40,10 @@ async function obtenerProductos(categoriaSeleccionada = null) {
 
         querySnapshot.forEach((doc) => {
             const datos = doc.data();
-            
-            // Tu validación original
             const nombreFinal = datos.nombre || datos.Nombre || "Producto sin nombre";
             const precioFinal = datos.precio || datos.Precio || "0.00";
             const imagenFinal = datos.imagen || datos.Imagen || "https://via.placeholder.com/150";
 
-            // Tu estructura HTML intacta
             contenedor.innerHTML += `
             <article class="product-card">
                 <img src="${imagenFinal}" alt="${nombreFinal}">
@@ -64,29 +68,111 @@ async function obtenerProductos(categoriaSeleccionada = null) {
     }
 }
 
- // --- LÓGICA DE FILTRO CORREGIDA ---
+// --- LÓGICA DE FILTRO ---
 const botonesFiltro = document.querySelectorAll('.tab-btn');
 
 botonesFiltro.forEach(boton => {
     boton.addEventListener('click', () => {
-        // 1. Efecto visual de botones
         botonesFiltro.forEach(b => b.classList.remove('active'));
         boton.classList.add('active');
-
-        // 2. Limpiamos el texto para evitar errores de espacios o mayúsculas
-        // .trim() quita espacios invisibles
         const categoria = boton.innerText.trim(); 
-        
-        console.log("Filtrando por:", categoria); // Esto te ayudará a ver qué busca en la consola
-
-        // 3. Llamamos a la función
-        // Si el botón es uno especial para mostrar TODO, podrías poner una condición
-        // Pero basándonos en tu código actual:
+        console.log("Filtrando por:", categoria);
         obtenerProductos(categoria);
     });
 });
 
-// Tip: Si tienes un botón para mostrar todos los productos de nuevo:
 document.querySelector('.cat-item.active')?.addEventListener('click', () => {
-    obtenerProductos(); // Carga todos sin filtro
+    obtenerProductos(); 
 });
+
+// --- LÓGICA DEL CARRITO (Agregar productos) ---
+contenedor.addEventListener('click', (e) => {
+    const boton = e.target.closest('.add-btn');
+    
+    if (boton) {
+        const card = boton.closest('.product-card');
+        const producto = {
+            nombre: card.querySelector('h4').innerText,
+            precio: card.querySelector('.price-tag').innerText
+        };
+
+        carrito.push(producto);
+        
+        // Actualizar contador visual
+        if(cartBadge) cartBadge.innerText = carrito.length;
+        
+        // Tu animación sutil
+        boton.style.backgroundColor = "var(--turquesa-dark)";
+        setTimeout(() => boton.style.backgroundColor = "var(--turquesa)", 200);
+    }
+});
+
+// --- LÓGICA DEL MODAL ---
+
+// 2. Abrir el modal y mostrar la lista
+// 2. Abrir el modal y mostrar la lista con opción de eliminar
+btnAbrirModal.onclick = function() {
+    renderizarCarrito();
+    modal.style.display = "block";
+}
+
+// Función separada para poder redibujar la lista si borramos algo
+function renderizarCarrito() {
+    listaCarritoUI.innerHTML = "";
+    let total = 0;
+
+    if (carrito.length === 0) {
+        listaCarritoUI.innerHTML = "<p style='text-align:center; padding:20px;'>Tu carrito está vacío</p>";
+    }
+
+    carrito.forEach((prod, index) => {
+        listaCarritoUI.innerHTML += `
+            <div class="cart-item-row">
+                <div class="cart-item-info">
+                    <span>${prod.nombre}</span>
+                    <strong>${prod.precio}</strong>
+                </div>
+                <button class="delete-item" data-index="${index}">&times;</button>
+            </div>
+        `;
+        const precioLimpio = prod.precio.replace('$', '').replace(',', '');
+        total += parseFloat(precioLimpio);
+    });
+
+    totalUI.innerText = `$${total.toFixed(2)}`;
+    if(cartBadge) cartBadge.innerText = carrito.length;
+}
+
+// Lógica para detectar el clic en el botón de eliminar
+listaCarritoUI.addEventListener('click', (e) => {
+    if (e.target.classList.contains('delete-item')) {
+        const indexABorrar = e.target.getAttribute('data-index');
+        // Eliminamos el producto del arreglo
+        carrito.splice(indexABorrar, 1);
+        // Volvemos a dibujar la lista actualizada
+        renderizarCarrito();
+    }
+});
+
+
+// 3. Cerrar modal
+btnCerrarModal.onclick = () => modal.style.display = "none";
+window.onclick = (event) => { 
+    if (event.target == modal) modal.style.display = "none"; 
+}
+
+// 4. Botón final de WhatsApp dentro del Modal
+document.getElementById("btn-whatsapp-send").onclick = function() {
+    if (carrito.length === 0) {
+        alert("El carrito está vacío");
+        return;
+    }
+    let listaTexto = "";
+    carrito.forEach((p, i) => listaTexto += `${i+1}. *${p.nombre}* (${p.precio})\n`);
+    
+    const mensaje = `¡Hola NovaMarket! 👋\nMi pedido es:\n${listaTexto}\n*Total:* ${totalUI.innerText}`;
+    window.open(`https://wa.me/${miTelefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
+};
+
+// Carga inicial de productos
+obtenerProductos();
