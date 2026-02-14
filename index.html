@@ -20,18 +20,20 @@
                 <input type="text" placeholder="Search products...">
             </div>
             <div class="user-nav">
-    <div class="user-profile-info">
-        <div class="user-text">
-            <p class="user-name">Hello, <span>Jhon Kevin!</span></p>
-            <p class="user-balance"><small>BIEMBENIDO</small></p>
-        </div>
-        <div class="user-avatar">
-            <i class="fas fa-user-circle"></i> </div>
-    </div>
-    <div class="cart-container" style="cursor: pointer;">
-    <i class="fas fa-shopping-cart cart-icon"></i>
-    <span class="cart-badge">0</span>
-</div>
+                <div class="user-profile-info">
+                    <div class="user-text">
+                        <p class="user-name">Hello, <span>Jhon Kevin!</span></p>
+                        <p class="user-balance"><small>BIENVENIDO</small></p>
+                    </div>
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i> 
+                    </div>
+                </div>
+                <div class="cart-container" style="cursor: pointer;">
+                    <i class="fas fa-shopping-cart cart-icon"></i>
+                    <span class="cart-badge">0</span>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -49,56 +51,64 @@
             <div class="cat-item active"><i class="fas fa-th-large"></i><span>All Menu</span></div>
             <div class="cat-item"><i class="fas fa-percentage"></i><span>Promo</span></div>
             <div class="cat-item"><i class="fas fa-truck"></i><span>Delivery</span></div>
-            <div class="cat-item"><i class="fas fa-heart"></i><span>Favorite</span></div>
+            <div class="cat-item btn-favoritos"><i class="fas fa-heart"></i><span>Favorite</span></div>
             <div class="cat-item"><i class="fas fa-receipt"></i><span>Orders</span></div>
         </section>
 
-         <section class="filter-section">
-    <div class="filter-tabs">
-        <button class="tab-btn active">Juice</button>
-        <button class="tab-btn">Smoothies</button>
-        <button class="tab-btn">Cakes</button>
-    </div>
+        <section class="filter-section">
+            <div class="filter-tabs">
+                <button class="tab-btn active">Juice</button>
+                <button class="tab-btn">Smoothies</button>
+                <button class="tab-btn">Cakes</button>
+            </div>
 
-    <div class="menu-search-container">
-        <div class="menu-search-box">
-            <input type="text" placeholder="Search menu here">
-            <i class="fas fa-search" style="color: #ccc;"></i>
-        </div>
-        <div class="filter-icon-btn">
-            <i class="fas fa-sliders-h"></i>
-        </div>
-    </div>
-</section>
-
-<section class="product-grid" id="products-container">
-    </section>
+            <div class="menu-search-container">
+                <div class="menu-search-box">
+                    <input type="text" placeholder="Search menu here">
+                    <i class="fas fa-search" style="color: #ccc;"></i>
+                </div>
+                <div class="filter-icon-btn">
+                    <i class="fas fa-sliders-h"></i>
+                </div>
+            </div>
+        </section>
 
         <section class="product-grid" id="products-container">
             </section>
     </main>
 
-    <script type="module" src="js/main.js"></script>
-
-   <div id="cart-modal" class="cart-modal">
-    <div class="cart-modal-content">
-        <div class="cart-modal-header">
-            <h3>Mi Pedido</h3>
-            <span class="close-modal">&times;</span>
-        </div>
-        <div id="cart-items-list" class="cart-items-list">
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3>Mi Pedido</h3>
+                <span class="close-modal">&times;</span>
             </div>
-        <div class="cart-modal-footer">
-            <div class="total-container">
-                <span>Total:</span>
-                <span id="cart-total-amount">$0.00</span>
+            <div id="cart-items-list" class="cart-items-list"></div>
+            <div class="cart-modal-footer">
+                <div class="total-container">
+                    <span>Total:</span>
+                    <span id="cart-total-amount">$0.00</span>
+                </div>
+                <button id="btn-whatsapp-send" class="btn-whatsapp-send">
+                    <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+                </button>
             </div>
-            <button id="btn-whatsapp-send" class="btn-whatsapp-send">
-                <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
-            </button>
         </div>
     </div>
-</div>
 
+    <div id="fav-modal" class="cart-modal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h3>Mis Favoritos ❤️</h3>
+                <span class="close-fav">&times;</span>
+            </div>
+            <div id="fav-items-list" class="cart-items-list"></div>
+            <div class="cart-modal-footer">
+                <p style="text-align: center; color: #888; font-size: 0.9rem;">Tus productos guardados</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>

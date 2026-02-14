@@ -8,6 +8,7 @@ const contenedor = document.getElementById('products-container');
 let carrito = [];
 const miTelefono = "916992293"; // Tu número real aquí
 const cartBadge = document.querySelector('.cart-badge');
+let favoritos = JSON.parse(localStorage.getItem('misFavoritos')) || [];
 
 // Elementos del Modal
 const modal = document.getElementById("cart-modal");
@@ -82,9 +83,12 @@ botonesFiltro.forEach(boton => {
     });
 });
 
-document.querySelector('.cat-item.active')?.addEventListener('click', () => {
+document.querySelector('.cat-item i.fa-th-large').parentElement.addEventListener('click', () => {
+    // Esto vuelve a llamar a tu función principal que trae todo de la base de datos
     obtenerProductos(); 
 });
+
+
 
 // --- LÓGICA DEL CARRITO (Agregar productos) ---
 contenedor.addEventListener('click', (e) => {
@@ -232,3 +236,97 @@ function activarBuscadores() {
     // Escucha al de abajo
     buscadorMenu?.addEventListener('input', filtrarProductos);
 }
+
+function marcarFavoritosGuardados() {
+    const cards = document.querySelectorAll('.product-card');
+    cards.forEach(card => {
+        const nombre = card.querySelector('h4').innerText;
+        const corazon = card.querySelector('.fa-heart');
+        
+        // Si el nombre está en nuestra lista de favoritos, le ponemos la clase roja
+        if (favoritos.includes(nombre)) {
+            corazon.classList.add('active');
+        }
+    });
+}contenedor.addEventListener('click', (e) => {
+    const corazon = e.target.closest('.fa-heart');
+    
+    if (corazon) {
+        const card = corazon.closest('.product-card');
+        const nombreProducto = card.querySelector('h4').innerText;
+
+        if (favoritos.includes(nombreProducto)) {
+            // Si ya era favorito, lo sacamos de la lista
+            favoritos = favoritos.filter(item => item !== nombreProducto);
+            corazon.classList.remove('active');
+        } else {
+            // Si no estaba, lo agregamos
+            favoritos.push(nombreProducto);
+            corazon.classList.add('active');
+        }
+
+        // Guardamos la lista actualizada en el navegador
+        localStorage.setItem('misFavoritos', JSON.stringify(favoritos));
+    }
+});
+
+
+// --- CONTROL DE FAVORITOS ---
+
+const elModalFav = document.getElementById("fav-modal");
+const laListaFav = document.getElementById("fav-items-list");
+
+// 1. Buscamos el botón Favorite por su clase y posición
+const todosLosItemsMenu = document.querySelectorAll('.cat-item');
+let botonFavReal = null;
+
+todosLosItemsMenu.forEach(item => {
+    if(item.innerText.includes("Favorite")) {
+        botonFavReal = item;
+    }
+});
+
+// 2. Función para pintar los favoritos
+function dibujarFavoritos() {
+    const guardados = JSON.parse(localStorage.getItem('misFavoritos')) || [];
+    laListaFav.innerHTML = "";
+
+    if (guardados.length === 0) {
+        laListaFav.innerHTML = "<p style='text-align:center; padding:30px;'>No tienes favoritos todavía. ❤️</p>";
+        return;
+    }
+
+    guardados.forEach(prod => {
+        const div = document.createElement('div');
+        div.className = 'fav-row';
+        div.innerHTML = `
+            <span style="font-weight:bold;">${prod}</span>
+            <i class="fas fa-trash" onclick="borrarDeFavs('${prod}')" style="color:red; cursor:pointer;"></i>
+        `;
+        laListaFav.appendChild(div);
+    });
+}
+
+// 3. Abrir al hacer clic
+if (botonFavReal) {
+    botonFavReal.onclick = function() {
+        dibujarFavoritos();
+        elModalFav.style.setProperty('display', 'block', 'important');
+    };
+}
+
+// 4. Cerrar
+document.querySelector(".close-fav").onclick = () => elModalFav.style.display = "none";
+
+window.onclick = (e) => {
+    if (e.target == elModalFav) elModalFav.style.display = "none";
+};
+
+// 5. Borrar
+window.borrarDeFavs = function(n) {
+    let f = JSON.parse(localStorage.getItem('misFavoritos')) || [];
+    f = f.filter(x => x !== n);
+    localStorage.setItem('misFavoritos', JSON.stringify(f));
+    dibujarFavoritos();
+    if(typeof marcarFavoritosGuardados === 'function') marcarFavoritosGuardados();
+};

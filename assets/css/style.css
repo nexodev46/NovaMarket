@@ -540,5 +540,116 @@ body {
 }
 
 
+.fa-heart.active {
+    font-weight: 900 !important;
+    color: #ff4d4d !important; /* Rojo */
+    transform: scale(1.2);
+    transition: 0.3s;
+}
+
+
+
+
+/* ESTILOS PARA EL MODAL DE FAVORITOS */
+/* FORZAR VISIBILIDAD DE FAVORITOS */
+#fav-modal.cart-modal {
+    display: none; 
+    position: fixed !important;
+    z-index: 99999 !important; /* Por encima de todo */
+    background-color: rgba(0,0,0,0.8) !important;
+}
+
+#fav-modal .cart-modal-content {
+    display: block !important;
+}
+
+.fav-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+
+/* --- RESPONSIVE DESIGN (MÓVILES) --- */
+
+@media (max-width: 768px) {
+    /* 1. Ajuste de la Navegación Superior */
+    .nav-container {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px;
+    }
+
+    .search-bar {
+        width: 100%; /* El buscador ocupa todo el ancho en celular */
+        order: 3;
+    }
+
+    .user-nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    /* 2. Banner de Promo (Hero) */
+    .hero-section {
+        height: 180px; /* Reducimos altura para que no ocupe toda la pantalla */
+    }
+
+    .banner-text h1 {
+        font-size: 1.2rem; /* Letra más pequeña para que no se corte */
+    }
+
+    /* 3. Categorías (All Menu, Favorite, etc.) */
+    .categories-grid {
+        display: flex;
+        overflow-x: auto; /* Permite deslizar hacia los lados con el dedo */
+        padding-bottom: 10px;
+        gap: 15px;
+        justify-content: flex-start;
+    }
+
+    .cat-item {
+        min-width: 80px; /* Tamaño fijo para que se puedan deslizar */
+        flex-shrink: 0;
+    }
+
+    /* 4. Filtros (Juice, Smoothies...) */
+    .filter-tabs {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 10px;
+    }
+
+    .menu-search-container {
+        flex-direction: row; /* Mantenemos buscador y filtro alineados */
+        gap: 10px;
+    }
+
+    /* 5. GRID DE PRODUCTOS (Lo más importante) */
+    #products-container {
+        grid-template-columns: repeat(2, 1fr); /* Dos productos por fila en celular */
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .product-card {
+        padding: 10px;
+    }
+
+    .product-card img {
+        height: 120px; /* Imágenes un poco más pequeñas */
+    }
+
+    /* 6. Ajuste de los Modales (Carrito y Favoritos) */
+    .cart-modal-content {
+        width: 95% !important;
+        margin: 10% auto !important;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+}
 
 
