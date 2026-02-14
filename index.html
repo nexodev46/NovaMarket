@@ -3,66 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NovaMarket | Tu Tienda de Jugos</title>
+    <title>NovaMarket | Tienda de Jugos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
-    <header class="main-header">
-        <div class="header-top">
-            <div class="user-profile">
-                <img src="assets/img/perfil.jpg" alt="Usuario" class="avatar">
-                <span>Ingoude Juice Home</span>
+    <nav class="top-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shopping-basket"></i> NovaMarket
             </div>
-            <div class="header-icons">
+            <div class="search-bar">
                 <i class="fas fa-search"></i>
-                <i class="fas fa-bars"></i>
+                <input type="text" placeholder="Search products...">
+            </div>
+            <div class="user-nav">
+                <div class="wallet-status">
+                    <p>Hello, Carlos!</p>
+                    <span>$ 32.66 <small>Top Up</small></span>
+                </div>
+                <i class="fas fa-shopping-cart cart-icon"></i>
             </div>
         </div>
+    </nav>
 
-        <div class="status-cards">
-            <div class="card">
-                <p>Special Free Delivery</p>
-                <strong>Order for You!</strong>
-            </div>
-            <div class="card">
-                <p>My Wallet</p>
-                <strong>$ 32.50</strong>
+    <header class="hero-section">
+        <div class="promo-banner">
+            <img src="https://tse1.mm.bing.net/th/id/OIP.uf3_Xmv067cSZ64mhVRfbwHaE7?cb=defcachec2&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Banner">
+            <div class="banner-text">
+                <h1>New Outlet Will Be Come in Borcelle Street!</h1>
             </div>
         </div>
     </header>
 
-    <main class="container">
-        <section class="promo-banner">
-            <img src="assets/img/banner.jpg" alt="Nueva Sucursal">
-            <div class="banner-text">
-                <h2>New Outlet Will Be Come in Borcelle Street!</h2>
-            </div>
-        </section>
-
-        <nav class="categories">
-            <div class="cat-item"><i class="fas fa-th-large"></i><span>All Menu</span></div>
+    <main class="main-container">
+        <section class="categories-grid">
+            <div class="cat-item active"><i class="fas fa-th-large"></i><span>All Menu</span></div>
             <div class="cat-item"><i class="fas fa-percentage"></i><span>Promo</span></div>
-            <div class="cat-item"><i class="fas fa-truck"></i><span>Free Delivery</span></div>
-        </nav>
-
-        <section class="product-list">
-            <h3>All Menu Juice</h3>
-            <div id="products-container">
-                <article class="product-card">
-                    <img src="assets/img/banana.jpg" alt="Banana Smoothie">
-                    <div class="product-info">
-                        <h4>Banana Smoothie</h4>
-                        <div class="sizes"><span>M</span><span>L</span></div>
-                        <p class="price">$11.99 <i class="fas fa-shopping-cart"></i></p>
-                    </div>
-                </article>
-            </div>
+            <div class="cat-item"><i class="fas fa-truck"></i><span>Delivery</span></div>
+            <div class="cat-item"><i class="fas fa-heart"></i><span>Favorite</span></div>
+            <div class="cat-item"><i class="fas fa-receipt"></i><span>Orders</span></div>
         </section>
+
+         <section class="filter-section">
+    <div class="filter-tabs">
+        <button class="tab-btn active">Juice</button>
+        <button class="tab-btn">Smoothies</button>
+    </div>
+
+    <div class="menu-search-container">
+        <div class="menu-search-box">
+            <input type="text" placeholder="Search menu here">
+            <i class="fas fa-search" style="color: #ccc;"></i>
+        </div>
+        <div class="filter-icon-btn">
+            <i class="fas fa-sliders-h"></i>
+        </div>
+    </div>
+</section>
+
+<section class="product-grid" id="products-container">
+    </section>
+
+        <section class="product-grid" id="products-container">
+            </section>
     </main>
 
-    <script src="assets/js/main.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
