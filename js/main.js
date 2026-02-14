@@ -4,7 +4,7 @@ import { collection, getDocs, query, where } from "https://www.gstatic.com/fireb
 
 const contenedor = document.getElementById('products-container');
 
-// --- VARIABLES GLOBALES (Solo una vez) ---
+// --- VARIABLES GLOBALES (Solo una vez) --
 let carrito = [];
 const miTelefono = "916992293"; // Tu número real aquí
 const cartBadge = document.querySelector('.cart-badge');
@@ -62,6 +62,7 @@ async function obtenerProductos(categoriaSeleccionada = null) {
             </article>
             `;
         });
+
     } catch (error) {
         console.error("Error al obtener productos:", error);
         contenedor.innerHTML = '<p>Hubo un error al cargar los productos. Revisa tu conexión.</p>';
@@ -201,5 +202,33 @@ function actualizarSaludo() {
 }
 
 // Ejecutamos la función apenas cargue la página
+
 actualizarSaludo();
-actualizarSaludo();
+obtenerProductos(); // Esta ya la tienes
+activarBuscadores(); // <--- AGREGA ESTA LÍNEA
+
+// --- FUNCIÓN DE BÚSQUEDA ACTUALIZADA ---
+function activarBuscadores() {
+    // 1. Seleccionamos el de arriba (barra blanca) y el de abajo (menu search)
+    const buscadorSuperior = document.querySelector('.search-bar input');
+    const buscadorMenu = document.querySelector('.menu-search-box input');
+
+    // Esta es la lógica que oculta o muestra las cards
+    const filtrarProductos = (evento) => {
+        const texto = evento.target.value.toLowerCase().trim();
+        const productos = document.querySelectorAll('.product-card');
+
+        productos.forEach(card => {
+            const nombre = card.querySelector('h4').innerText.toLowerCase();
+            // Si el texto que escribes está en el nombre, se queda; si no, se va.
+            card.style.display = nombre.includes(texto) ? "flex" : "none";
+        });
+    };
+
+    // 2. Conectamos AMBOS al mismo filtro
+    // Escucha al de arriba
+    buscadorSuperior?.addEventListener('input', filtrarProductos);
+    
+    // Escucha al de abajo
+    buscadorMenu?.addEventListener('input', filtrarProductos);
+}
