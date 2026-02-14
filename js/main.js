@@ -177,6 +177,7 @@ document.getElementById("btn-whatsapp-send").onclick = function() {
 // Carga inicial de productos
 obtenerProductos();
 
+
 // --- LÓGICA DE SALUDO DINÁMICO ---
 function actualizarSaludo() {
     // Buscamos el elemento donde dice "BIENVENIDO" o "Mucho Gusto"
@@ -200,4 +201,5 @@ function actualizarSaludo() {
 }
 
 // Ejecutamos la función apenas cargue la página
+actualizarSaludo();
 actualizarSaludo();
