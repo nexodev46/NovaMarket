@@ -176,3 +176,28 @@ document.getElementById("btn-whatsapp-send").onclick = function() {
 
 // Carga inicial de productos
 obtenerProductos();
+
+// --- LÓGICA DE SALUDO DINÁMICO ---
+function actualizarSaludo() {
+    // Buscamos el elemento donde dice "BIENVENIDO" o "Mucho Gusto"
+    // Según tu captura es el span debajo de Jhon Kevin
+    const saludoElemento = document.querySelector('.user-name span:last-child');
+    
+    if (saludoElemento) {
+        const hora = new Date().getHours();
+        let mensaje = "";
+
+        if (hora >= 6 && hora < 12) {
+            mensaje = "¡Buenos días! ☀️";
+        } else if (hora >= 12 && hora < 19) {
+            mensaje = "¡Buenas tardes! ☕";
+        } else {
+            mensaje = "¡Buenas noches! 🌙";
+        }
+
+        saludoElemento.innerText = mensaje;
+    }
+}
+
+// Ejecutamos la función apenas cargue la página
+actualizarSaludo();
