@@ -171,7 +171,7 @@ body {
 
 .filter-tabs {
     display: flex;
-    gap: 15px;
+    gap: 13px;
     flex-wrap: wrap;
 }
 
