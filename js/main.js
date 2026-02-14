@@ -179,10 +179,19 @@ document.getElementById("btn-whatsapp-send").onclick = function() {
         alert("El carrito está vacío");
         return;
     }
+
+    const envio = JSON.parse(localStorage.getItem('datosEnvio')) || null;
     let listaTexto = "";
     carrito.forEach((p, i) => listaTexto += `${i+1}. *${p.nombre}* (${p.precio})\n`);
     
-    const mensaje = `¡Hola NovaMarket! 👋\nMi pedido es:\n${listaTexto}\n*Total:* ${totalUI.innerText}`;
+    let mensaje = `¡Hola NovaMarket! 👋\n\n*MI PEDIDO:*\n${listaTexto}\n*Total:* ${totalUI.innerText}\n\n`;
+    
+    if (envio) {
+        mensaje += `*DATOS DE ENVÍO:*\n📍 *Nombre:* ${envio.nombre}\n🏠 *Dirección:* ${envio.direccion}\n📌 *Referencia:* ${envio.referencia}`;
+    } else {
+        mensaje += `_(No se proporcionó dirección de entrega)_`;
+    }
+
     window.open(`https://wa.me/${miTelefono}?text=${encodeURIComponent(mensaje)}`, '_blank');
 };
 
@@ -355,3 +364,35 @@ function mostrarMensajeAgregado(nombreProducto) {
         toast.remove();
     }, 3000);
 }
+
+
+
+const deliveryModal = document.getElementById("delivery-modal");
+const btnDelivery = document.querySelector('.cat-item i.fa-shipping-fast')?.parentElement 
+                 || [...document.querySelectorAll('.cat-item')].find(el => el.innerText.includes("Delivery"));
+
+// Abrir Modal
+if (btnDelivery) {
+    btnDelivery.onclick = () => deliveryModal.style.display = "block";
+}
+
+// Cerrar Modal
+document.querySelector(".close-delivery").onclick = () => deliveryModal.style.display = "none";
+
+// Guardar datos en LocalStorage para que no se borren al recargar
+document.getElementById("btn-save-delivery").onclick = function() {
+    const datos = {
+        nombre: document.getElementById("del-nombre").value,
+        direccion: document.getElementById("del-direccion").value,
+        referencia: document.getElementById("del-referencia").value
+    };
+
+    if(!datos.nombre || !datos.direccion) {
+        alert("Por favor, ingresa nombre y dirección.");
+        return;
+    }
+
+    localStorage.setItem('datosEnvio', JSON.stringify(datos));
+    mostrarMensajeAgregado("Datos de entrega guardados");
+    deliveryModal.style.display = "none";
+};

@@ -17,7 +17,7 @@
             </div>
             <div class="search-bar">
                 <i class="fas fa-search"></i>
-                <input type="text" placeholder="Buscar">
+                <input type="text" placeholder="">
             </div>
             <div class="user-nav">
                 <div class="user-profile-info">
@@ -110,5 +110,32 @@
     </div>
 
     <script type="module" src="js/main.js"></script>
+
+
+    <div id="delivery-modal" class="cart-modal">
+    <div class="cart-modal-content">
+        <div class="cart-modal-header">
+            <h3>Datos de Entrega 🚚</h3>
+            <span class="close-delivery" style="cursor:pointer; font-size:28px;">&times;</span>
+        </div>
+        
+        <div class="delivery-form" style="padding: 20px;">
+            <label>Nombre Completo:</label>
+            <input type="text" id="del-nombre" placeholder="Ej: Jhon Kevin" style="width:100%; margin-bottom:15px; padding:10px; border-radius:8px; border:1px solid #ddd;">
+            
+            <label>Dirección Exacta:</label>
+            <textarea id="del-direccion" placeholder="Calle, número, distrito..." style="width:100%; margin-bottom:15px; padding:10px; border-radius:8px; border:1px solid #ddd; height:80px;"></textarea>
+            
+            <label>Referencia:</label>
+            <input type="text" id="del-referencia" placeholder="Cerca de..." style="width:100%; margin-bottom:15px; padding:10px; border-radius:8px; border:1px solid #ddd;">
+            
+            <button id="btn-save-delivery" style="width:100%; background:var(--turquesa); color:white; border:none; padding:12px; border-radius:50px; font-weight:bold; cursor:pointer;">
+                Guardar Datos
+            </button>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
