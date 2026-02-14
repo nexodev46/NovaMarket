@@ -396,3 +396,33 @@ document.getElementById("btn-save-delivery").onclick = function() {
     mostrarMensajeAgregado("Datos de entrega guardados");
     deliveryModal.style.display = "none";
 };
+
+
+
+// --- LÓGICA DEL BOTÓN DATOS ---
+const infoModal = document.getElementById("info-modal");
+
+// Buscamos el botón por el texto "Datos" (el último de los círculos)
+const todosLosItemsCat = document.querySelectorAll('.cat-item');
+let botonDatos = null;
+
+todosLosItemsCat.forEach(item => {
+    if(item.innerText.includes("Datos")) {
+        botonDatos = item;
+    }
+});
+
+// Abrir al hacer clic
+if (botonDatos) {
+    botonDatos.onclick = function() {
+        infoModal.style.display = "block";
+    };
+}
+
+// Cerrar al darle a la X
+document.querySelector(".close-info").onclick = () => infoModal.style.display = "none";
+
+// Cerrar si hacen clic fuera del cuadrito
+window.addEventListener('click', (e) => {
+    if (e.target == infoModal) infoModal.style.display = "none";
+});
