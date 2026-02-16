@@ -520,10 +520,11 @@ async function dibujarPromociones() {
         
         listaPromoUI.innerHTML = "";
 
-        if (querySnapshot.empty) {
+     if (querySnapshot.empty) {
             listaPromoUI.innerHTML = "<p style='text-align:center; padding:20px;'>Próximamente nuevas ofertas. 😉</p>";
             return;
         }
+
 
         querySnapshot.forEach((doc) => {
             const prod = doc.data();
@@ -636,5 +637,26 @@ btnDarkMode.onclick = () => {
 
 
 
+// --- LÓGICA DE PERSISTENCIA Y SALIDA ---
 
+// 1. Guardar el carrito en el navegador cada vez que cambie
+function actualizarAlmacenamiento() {
+    localStorage.setItem('miCarritoNova', JSON.stringify(carrito));
+}
+
+// 2. Función para salir (se activa desde el menú de ajustes)
+window.salirDeLaTienda = function() {
+    const confirmar = confirm("¿Estás seguro de que quieres salir? Tu carrito quedará guardado para tu próxima visita. 😊");
+    
+    if (confirmar) {
+        // Guardamos una última vez por seguridad antes de irnos
+        actualizarAlmacenamiento();
+        
+        // Redirigimos
+        window.location.href = "https://www.google.com";
+    }
+};
+
+// 3. ¡IMPORTANTE! Asegúrate de llamar a actualizarAlmacenamiento() 
+// dentro de tus funciones donde agregas o quitas productos del carrito.
 
