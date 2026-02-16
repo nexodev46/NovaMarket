@@ -604,3 +604,26 @@ window.ordenarProductos = function(criterio) {
 
 
 
+
+
+const btnTema = document.getElementById('btn-tema');
+const iconoTema = btnTema.querySelector('i');
+
+btnTema.onclick = () => {
+    document.body.classList.toggle('dark-mode');
+
+    if (document.body.classList.contains('dark-mode')) {
+        iconoTema.classList.replace('fa-moon', 'fa-sun');
+        localStorage.setItem('tema-preferido', 'oscuro');
+    } else {
+        iconoTema.classList.replace('fa-sun', 'fa-moon');
+        localStorage.setItem('tema-preferido', 'claro');
+    }
+};
+
+if (localStorage.getItem('tema-preferido') === 'oscuro') {
+    document.body.classList.add('dark-mode');
+    iconoTema.classList.replace('fa-moon', 'fa-sun');
+}
+
+

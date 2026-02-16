@@ -1,32 +1,47 @@
 :root {
+    /* TUS COLORES ORIGINALES (No los borres) */
     --turquesa: #72c6d1;
     --turquesa-dark: #5fb4bf;
     --celeste-claro: #f0f9fa;
     --gris-oscuro: #334257;
     --blanco: #ffffff;
+
+    /* NUEVAS VARIABLES PARA EL CAMBIO DE MODO */
+    --bg-main: #fdfdfd;      /* Color de fondo de la página */
+    --card-bg: #ffffff;      /* Color de fondo de las tarjetas */
+    --text-color: #334257;   /* Color de las letras */
+    --nav-bg: #ffffff;       /* Color de la barra de navegación */
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* ESTO ES LO QUE SE ACTIVA AL APLASTAR EL BOTÓN */
+body.dark-mode {
+    --bg-main: #121212;      /* Negro para el fondo */
+    --card-bg: #1e1e1e;      /* Gris oscuro para tarjetas */
+    --text-color: #f1f1f1;    /* Blanco para las letras */
+    --nav-bg: #1a1a1a;       /* Gris oscuro para el menú */
+    --blanco: #1e1e1e;       /* Reemplazamos el blanco puro por gris oscuro */
 }
+
+
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #fdfdfd;
-    color: var(--gris-oscuro);
+    background-color: var(--bg-main); /* Cambiado */
+    color: var(--text-color);         /* Cambiado */
+    transition: background 0.4s ease, color 0.4s ease;
 }
+
 
 /* --- NAVEGACIÓN --- */
 .top-nav {
-    background: white;
+    background: var(--nav-bg);
     padding: 10px 0;
     box-shadow: 0 2px 15px rgba(0,0,0,0.05);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
+
 
 .nav-container {
     max-width: 1300px;
@@ -267,7 +282,7 @@ body {
 }
 
 .product-card {
-    background: white;
+   background: var(--card-bg);
     border-radius: 40px;
     padding: 25px;
     display: flex;
@@ -391,14 +406,32 @@ body {
     border: 1px solid #eee;
 }
 
+
 .user-text {
-    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Alinea el texto a la derecha como en tu captura */
 }
+
+.bienvenido-tag {
+    background-color: var(--turquesa);
+    color: white;
+    font-size: 0.6rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 5px;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+}
+
+
+
 
 .user-name {
     font-size: 0.85rem;
-    color: #888;
+    color: var(--text-color); /* Usamos la variable para que cambie en modo oscuro */
     margin: 0;
+    font-weight: 500;
 }
 
 .user-name span {
