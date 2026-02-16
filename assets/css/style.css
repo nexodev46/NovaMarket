@@ -745,5 +745,40 @@ body {
 
 
 
+/* Colores para el Modo Oscuro */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+}
 
+body.dark-mode .top-nav, 
+body.dark-mode .cat-item, 
+body.dark-mode .product-card, 
+body.dark-mode .cart-modal-content,
+body.dark-mode .ordenar-dropdown {
+    background-color: #2d2d2d !important;
+    color: #ffffff;
+    border-color: #444;
+}
+
+body.dark-mode .product-info h4,
+body.dark-mode .user-name span,
+body.dark-mode .total-container {
+    color: #ffffff;
+}
+
+body.dark-mode .search-bar,
+body.dark-mode .menu-search-box {
+    background: #3d3d3d;
+}
+
+body.dark-mode .search-bar input,
+body.dark-mode .menu-search-box input {
+    color: white;
+}
+
+/* Estilo para que el botón resalte */
+#btn-dark-mode {
+    transition: transform 0.3s ease, background 0.3s ease;
+}
 

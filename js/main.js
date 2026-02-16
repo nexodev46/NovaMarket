@@ -156,7 +156,8 @@ contenedor.addEventListener('click', (e) => {
 // --- LÓGICA DEL MODAL ---
 
 // 2. Abrir el modal y mostrar la lista
-// 2. Abrir el modal y mostrar la lista con opción de eliminar
+
+
 btnAbrirModal.onclick = function() {
     renderizarCarrito();
     modal.style.display = "block";
@@ -605,6 +606,32 @@ window.ordenarProductos = function(criterio) {
 
 
 
+
+const btnDarkMode = document.getElementById('btn-dark-mode');
+const iconDarkMode = btnDarkMode.querySelector('i');
+
+// Verificar si ya estaba en modo oscuro antes
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    iconDarkMode.classList.replace('fa-moon', 'fa-sun');
+    btnDarkMode.style.background = "var(--turquesa)"; // Color sol
+}
+
+btnDarkMode.onclick = () => {
+    document.body.classList.toggle('dark-mode');
+    
+    if (document.body.classList.contains('dark-mode')) {
+        iconDarkMode.classList.replace('fa-moon', 'fa-sun');
+        btnDarkMode.style.background = "var(--turquesa)";
+        localStorage.setItem('theme', 'dark');
+        mostrarMensajeGenerico("Modo Oscuro activado 🌙", "success");
+    } else {
+        iconDarkMode.classList.replace('fa-sun', 'fa-moon');
+        btnDarkMode.style.background = "var(--gris-oscuro)";
+        localStorage.setItem('theme', 'light');
+        mostrarMensajeGenerico("Modo Claro activado ☀️", "success");
+    }
+};
 
 
 
