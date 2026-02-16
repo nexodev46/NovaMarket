@@ -661,7 +661,22 @@ body {
 
 
 
+/* Estilo para tu nueva foto de perfil */
+.avatar-img {
+    width: 40px;          /* Ajusta el tamaño según prefieras */
+    height: 40px;
+    border-radius: 50%;   /* Esto la hace perfectamente circular */
+    object-fit: cover;    /* Evita que la foto se estire o se vea mal */
+    border: 2px solid var(--turquesa); /* Un borde turquesa para que combine */
+    display: block;
+}
 
+/* Opcional: Ajustar el contenedor si es necesario */
+.user-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 
 
