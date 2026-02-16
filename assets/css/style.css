@@ -350,7 +350,7 @@ body {
 }
 
 /* --- RESPONSIVO --- */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .product-grid { grid-template-columns: 1fr; }
     .filter-section { flex-direction: column; gap: 20px; align-items: flex-start; }
     .menu-search-box { width: 100%; }
@@ -660,22 +660,43 @@ body {
 
 
 
-
-/* Estilo para tu nueva foto de perfil */
-.avatar-img {
-    width: 40px;          /* Ajusta el tamaño según prefieras */
-    height: 40px;
-    border-radius: 50%;   /* Esto la hace perfectamente circular */
-    object-fit: cover;    /* Evita que la foto se estire o se vea mal */
-    border: 2px solid var(--turquesa); /* Un borde turquesa para que combine */
-    display: block;
-}
-
-/* Opcional: Ajustar el contenedor si es necesario */
-.user-avatar {
+/* Asegura que el saludo, la foto y el carrito estén en una sola fila */
+.user-nav {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    gap: 20px; /* Espacio entre el perfil y el carrito */
+    white-space: nowrap; /* Evita que se salten de línea */
+}
+
+/* Contenedor de saludo y foto */
+.user-profile-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #f8f9fa;
+    padding: 5px 15px;
+    border-radius: 30px;
+    border: 1px solid #eee;
+}
+
+/* Tu foto de perfil con tamaño fijo para no mover el carrito */
+.avatar-img {
+    width: 35px;  /* Ajusta este tamaño si lo ves muy grande */
+    height: 35px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--turquesa);
+    display: block; /* Quita espacios extra debajo de la imagen */
+}
+
+/* Asegura que el contenedor del carrito no se mueva */
+.cart-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    min-width: 30px; /* Evita que colapse */
 }
 
 
