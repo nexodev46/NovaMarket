@@ -1,56 +1,36 @@
 :root {
-    /* TUS COLORES ORIGINALES (No los borres) */
     --turquesa: #72c6d1;
     --turquesa-dark: #5fb4bf;
     --celeste-claro: #f0f9fa;
     --gris-oscuro: #334257;
     --blanco: #ffffff;
-
-    /* NUEVAS VARIABLES PARA EL CAMBIO DE MODO */
-    --bg-main: #fdfdfd;      /* Color de fondo de la página */
-    --card-bg: #ffffff;      /* Color de fondo de las tarjetas */
-    --text-color: #334257;   /* Color de las letras */
-    --nav-bg: #ffffff;       /* Color de la barra de navegación */
 }
 
-/* ESTO ES LO QUE SE ACTIVA AL APLASTAR EL BOTÓN */
-body.dark-mode {
-    --bg-main: #121212;      /* Negro para el fondo */
-    --card-bg: #1e1e1e;      /* Gris oscuro para tarjetas */
-    --text-color: #f1f1f1;    /* Blanco para las letras */
-    --nav-bg: #1a1a1a;       /* Gris oscuro para el menú */
-    --blanco: #1e1e1e;       /* Reemplazamos el blanco puro por gris oscuro */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
+
 
 
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: var(--bg-main); /* Cambiado */
-    color: var(--text-color);         /* Cambiado */
-    transition: background 0.4s ease, color 0.4s ease;
+    background-color: #fdfdfd;
+    color: var(--gris-oscuro);
 }
-
 
 /* --- NAVEGACIÓN --- */
-/* Esto arregla la alineación de la parte superior */
 .top-nav {
-    display: flex;
-    justify-content: space-between; /* Logo a la izquierda, Luna centro, Perfil derecha */
-    align-items: center;
-    padding: 5px 10px;
-    gap: 10px;
-    width: 100%;
-    box-sizing: border-box;
+    background: white;
+    padding: 10px 0;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
-
-/* Para que la luna no empuje a los demás, la centramos */
-#btn-tema {
-    display: flex;
-    justify-content: center;
-    flex: 1; /* Esto hace que ocupe el espacio central */
-}
-
 
 .nav-container {
     max-width: 1300px;
@@ -62,7 +42,7 @@ body {
 }
 
 /* Mejora Responsive para Nav */
-@media (max-width: 480px) {
+@media (max-width: 992px) {
     .nav-container {
         grid-template-columns: 1fr auto;
         padding: 0 20px;
@@ -291,7 +271,7 @@ body {
 }
 
 .product-card {
-   background: var(--card-bg);
+    background: white;
     border-radius: 40px;
     padding: 25px;
     display: flex;
@@ -415,32 +395,14 @@ body {
     border: 1px solid #eee;
 }
 
-
 .user-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end; /* Alinea el texto a la derecha como en tu captura */
+    text-align: right;
 }
-
-.bienvenido-tag {
-    background-color: var(--turquesa);
-    color: white;
-    font-size: 0.5rem;
-    font-weight: 800;
-    padding: 1px 5px;
-    border-radius: 5px;
-    margin-top: 2px;
-    letter-spacing: 0.5px;
-}
-
-
-
 
 .user-name {
     font-size: 0.85rem;
-    color: var(--text-color); /* Usamos la variable para que cambie en modo oscuro */
+    color: #888;
     margin: 0;
-    font-weight: 500;
 }
 
 .user-name span {
@@ -780,4 +742,8 @@ body {
 .show-dropdown {
     display: block !important;
 }
+
+
+
+
 
