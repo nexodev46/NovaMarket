@@ -660,3 +660,13 @@ window.salirDeLaTienda = function() {
 // 3. ¡IMPORTANTE! Asegúrate de llamar a actualizarAlmacenamiento() 
 // dentro de tus funciones donde agregas o quitas productos del carrito.
 
+
+
+window.addEventListener('load', () => {
+    const loader = document.getElementById('loader-wrapper');
+    
+    // Le damos un pequeño delay de 1 segundo para que la gente vea la animación
+    setTimeout(() => {
+        loader.classList.add('loader-hidden');
+    }, 4000);
+});
