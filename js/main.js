@@ -96,13 +96,28 @@ document.querySelector('.cat-item i.fa-th-large').parentElement.addEventListener
 
 contenedor.addEventListener('click', (e) => {
     const boton = e.target.closest('.add-btn');
-    
     if (boton) {
+        // --- CAPTURA DE DATOS (Necesario para que funcione) ---
         const card = boton.closest('.product-card');
         const producto = {
             nombre: card.querySelector('h4').innerText,
             precio: card.querySelector('.price-tag').innerText
         };
+
+        // 1. Guardamos el icono original (el carrito)
+        const iconoOriginal = boton.innerHTML;
+
+        // 2. Cambiamos el color y el icono a un Check
+        boton.style.backgroundColor = "#2ecc71"; // Un verde éxito
+        boton.innerHTML = '<i class="fas fa-check"></i>';
+        boton.disabled = true; // Evitamos clics dobles accidentales mientras anima
+
+        // 3. Después de 1.5 segundos, volvemos a la normalidad
+        setTimeout(() => {
+            boton.style.backgroundColor = "var(--turquesa)";
+            boton.innerHTML = iconoOriginal;
+            boton.disabled = false;
+        }, 1500);
 
         carrito.push(producto);
 
@@ -113,7 +128,7 @@ contenedor.addEventListener('click', (e) => {
             // 1. Quitamos la clase por si ya la tenía de un clic anterior
             cartBadge.classList.remove('animar-badge');
             
-            // 2. Forzamos un "reflow" (truco para que el navegador reinicie la animación)
+            // 2. Forzamos un "reflow"
             void cartBadge.offsetWidth; 
             
             // 3. Agregamos la clase que hace el salto
@@ -123,11 +138,20 @@ contenedor.addEventListener('click', (e) => {
 
         mostrarMensajeAgregado(producto.nombre);
         
-        // Animación sutil del botón azul
-        boton.style.backgroundColor = "var(--turquesa-dark)";
-        setTimeout(() => boton.style.backgroundColor = "var(--turquesa)", 200);
+        // Animación sutil del botón azul (se ejecutará tras el check verde)
+        setTimeout(() => {
+            if (!boton.disabled) {
+                boton.style.backgroundColor = "var(--turquesa-dark)";
+                setTimeout(() => boton.style.backgroundColor = "var(--turquesa)", 200);
+            }
+        }, 1500);
     }
 });
+
+
+
+
+
 
 // --- LÓGICA DEL MODAL ---
 
