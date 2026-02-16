@@ -90,8 +90,8 @@ document.querySelector('.cat-item i.fa-th-large').parentElement.addEventListener
     obtenerProductos(); 
 });
 
-
-
+    
+// La línea 93 ahora debería estar limpia para que siga la lógica del carrito abajo
 // --- LÓGICA DEL CARRITO (Agregar productos) ---
 contenedor.addEventListener('click', (e) => {
     const boton = e.target.closest('.add-btn');
@@ -105,13 +105,24 @@ contenedor.addEventListener('click', (e) => {
 
         carrito.push(producto);
 
-        // AQUÍ ES EL LUGAR PERFECTO:
+        // --- INICIO DE LA ANIMACIÓN DEL BADGE ---
+        if(cartBadge) {
+            cartBadge.innerText = carrito.length;
+            
+            // 1. Quitamos la clase por si ya la tenía de un clic anterior
+            cartBadge.classList.remove('animar-badge');
+            
+            // 2. Forzamos un "reflow" (truco para que el navegador reinicie la animación)
+            void cartBadge.offsetWidth; 
+            
+            // 3. Agregamos la clase que hace el salto
+            cartBadge.classList.add('animar-badge');
+        }
+        // --- FIN DE LA ANIMACIÓN ---
+
         mostrarMensajeAgregado(producto.nombre);
         
-        // Actualizar contador visual
-        if(cartBadge) cartBadge.innerText = carrito.length;
-        
-        // Tu animación sutil
+        // Animación sutil del botón azul
         boton.style.backgroundColor = "var(--turquesa-dark)";
         setTimeout(() => boton.style.backgroundColor = "var(--turquesa)", 200);
     }
@@ -501,3 +512,4 @@ window.agregarDesdePromo = function(nombre, precio) {
     if(cartBadge) cartBadge.innerText = carrito.length;
     mostrarMensajeAgregado(nombre);
 };
+

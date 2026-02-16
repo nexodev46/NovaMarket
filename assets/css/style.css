@@ -643,3 +643,17 @@ body {
     gap: 8px;
     align-items: center;
 }
+
+
+/* Animación de salto para el contador del carrito */
+.animar-badge {
+    animation: saltoBadge 0.4s ease-out;
+    background-color: #ffeb3b !important; /* Cambia a amarillo momentáneamente */
+    color: #000 !important; /* Texto negro para que resalte en el amarillo */
+}
+
+@keyframes saltoBadge {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.6); } /* Se agranda */
+    100% { transform: scale(1); }  /* Vuelve al tamaño normal */
+}
