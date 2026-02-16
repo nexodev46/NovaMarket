@@ -657,3 +657,16 @@ body {
     50% { transform: scale(1.6); } /* Se agranda */
     100% { transform: scale(1); }  /* Vuelve al tamaño normal */
 }
+
+
+/* Estado cuando una talla está seleccionada */
+.size-chip.selected {
+    background-color: var(--turquesa);
+    color: white;
+    border-color: var(--turquesa-dark);
+    transform: scale(1.1);
+}
+
+
+
+
