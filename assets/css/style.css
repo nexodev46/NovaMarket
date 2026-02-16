@@ -33,13 +33,22 @@ body {
 
 
 /* --- NAVEGACIÓN --- */
+/* Esto arregla la alineación de la parte superior */
 .top-nav {
-    background: var(--nav-bg);
-    padding: 10px 0;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    display: flex;
+    justify-content: space-between; /* Logo a la izquierda, Luna centro, Perfil derecha */
+    align-items: center;
+    padding: 5px 10px;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Para que la luna no empuje a los demás, la centramos */
+#btn-tema {
+    display: flex;
+    justify-content: center;
+    flex: 1; /* Esto hace que ocupe el espacio central */
 }
 
 
@@ -53,7 +62,7 @@ body {
 }
 
 /* Mejora Responsive para Nav */
-@media (max-width: 992px) {
+@media (max-width: 480px) {
     .nav-container {
         grid-template-columns: 1fr auto;
         padding: 0 20px;
@@ -416,9 +425,9 @@ body {
 .bienvenido-tag {
     background-color: var(--turquesa);
     color: white;
-    font-size: 0.6rem;
+    font-size: 0.5rem;
     font-weight: 800;
-    padding: 2px 8px;
+    padding: 1px 5px;
     border-radius: 5px;
     margin-top: 2px;
     letter-spacing: 0.5px;
