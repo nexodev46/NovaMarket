@@ -659,13 +659,8 @@ body {
 }
 
 
-/* Estado cuando una talla está seleccionada */
-.size-chip.selected {
-    background-color: var(--turquesa);
-    color: white;
-    border-color: var(--turquesa-dark);
-    transform: scale(1.1);
-}
+
+
 
 
 

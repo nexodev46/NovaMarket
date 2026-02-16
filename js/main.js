@@ -272,16 +272,25 @@ function activarBuscadores() {
 }
 
 function marcarFavoritosGuardados() {
-    const cards = document.querySelectorAll('.product-card');
-    cards.forEach(card => {
-        const nombre = card.querySelector('h4').innerText;
-        const corazon = card.querySelector('.fa-heart');
-        
-        // Si el nombre está en nuestra lista de favoritos, le ponemos la clase roja
-        if (favoritos.includes(nombre)) {
-            corazon.classList.add('active');
+    const listaActual = JSON.parse(localStorage.getItem('misFavoritos')) || [];
+    const corazones = document.querySelectorAll('.fa-heart');
+
+    corazones.forEach(corazon => {
+        const card = corazon.closest('.product-card');
+        if (card) {
+            const nombre = card.querySelector('h4').innerText;
+            // Si el nombre está en la lista, rojo; si no, normal.
+            if (listaActual.includes(nombre)) {
+                corazon.classList.add('active');
+            } else {
+                corazon.classList.remove('active');
+            }
         }
     });
+
+
+
+
 }contenedor.addEventListener('click', (e) => {
     const corazon = e.target.closest('.fa-heart');
     
@@ -356,16 +365,30 @@ window.onclick = (e) => {
     if (e.target == elModalFav) elModalFav.style.display = "none";
 };
 
-// 5. Borrar
-window.borrarDeFavs = function(n) {
+
+// 5. Borrar favoritos 
+window.borrarDeFavs = function(nombreABorrar) {
+    // 1. Actualizamos el LocalStorage
     let f = JSON.parse(localStorage.getItem('misFavoritos')) || [];
-    f = f.filter(x => x !== n);
+    f = f.filter(x => x !== nombreABorrar);
     localStorage.setItem('misFavoritos', JSON.stringify(f));
+    
+    // 2. Actualizamos la variable local del script
+    favoritos = f; 
+
+    // 3. Refrescamos la lista visual dentro del modal
     dibujarFavoritos();
-    if(typeof marcarFavoritosGuardados === 'function') marcarFavoritosGuardados();
+    
+    // 4. ¡ESTO ES LO QUE FALTA! Buscamos el corazón en la página y le quitamos el rojo
+    const todasLasCards = document.querySelectorAll('.product-card');
+    todasLasCards.forEach(card => {
+        const nombreProducto = card.querySelector('h4').innerText;
+        if (nombreProducto === nombreABorrar) {
+            const corazon = card.querySelector('.fa-heart');
+            if (corazon) corazon.classList.remove('active');
+        }
+    });
 };
-
-
 
 
 function mostrarMensajeAgregado(nombreProducto) {
