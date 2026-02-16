@@ -701,3 +701,41 @@ body {
 
 
 
+
+/* El menú desplegable */
+.ordenar-dropdown {
+    display: none; /* Escondido por defecto */
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    z-index: 1000;
+    width: 180px;
+    border: 1px solid #eee;
+    overflow: hidden;
+}
+
+/* Los botones dentro del menú */
+.ordenar-dropdown button {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    background: none;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.ordenar-dropdown button:hover {
+    background-color: #f0f9fa;
+    color: #4dbbc4;
+}
+
+/* Clase que JS activará para mostrar el menú */
+.show-dropdown {
+    display: block !important;
+}
+

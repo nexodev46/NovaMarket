@@ -541,3 +541,42 @@ window.agregarDesdePromo = function(nombre, precio) {
 
 
 
+// 1. Capturamos los elementos
+const btnOrdenar = document.getElementById('btn-ordenar');
+const dropdownOrdenar = document.getElementById('dropdown-ordenar');
+
+// 2. Hacer que el menú aparezca/desaparezca al hacer clic
+btnOrdenar.onclick = (e) => {
+    e.stopPropagation(); // Evita que el clic se pase a otros elementos
+    dropdownOrdenar.classList.toggle('show-dropdown');
+};
+
+// 3. Cerrar el menú si el usuario hace clic en cualquier otra parte
+window.addEventListener('click', () => {
+    dropdownOrdenar.classList.remove('show-dropdown');
+});
+
+// 4. LA FUNCIÓN MÁGICA: Ordenar los productos
+window.ordenarProductos = function(criterio) {
+    // Convertimos las cards de productos en un Array para poder ordenarlas
+    const productosUI = Array.from(contenedor.querySelectorAll('.product-card'));
+    
+    productosUI.sort((a, b) => {
+        // Obtenemos los precios quitando el símbolo '$'
+        const precioA = parseFloat(a.querySelector('.price-tag').innerText.replace('$', ''));
+        const precioB = parseFloat(b.querySelector('.price-tag').innerText.replace('$', ''));
+
+        if (criterio === 'menor') return precioA - precioB;
+        if (criterio === 'mayor') return precioB - precioA;
+        
+        // Para 'reciente', como no tenemos fecha, simplemente los invertimos
+        return 0; 
+    });
+
+    // Limpiamos el contenedor y los volvemos a meter en el nuevo orden
+    contenedor.innerHTML = "";
+    productosUI.forEach(card => contenedor.appendChild(card));
+};
+
+
+

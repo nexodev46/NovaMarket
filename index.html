@@ -67,10 +67,18 @@
                     <input type="text" placeholder="Buscar Productos">
                     <i class="fas fa-search" style="color: #ccc;"></i>
                 </div>
-                <div class="filter-icon-btn">
-                    <i class="fas fa-sliders-h"></i>
-                </div>
-            </div>
+                
+               <div style="position: relative;"> <div class="filter-icon-btn" id="btn-ordenar">
+        <i class="fas fa-sliders-h"></i>
+    </div>
+
+    <div id="dropdown-ordenar" class="ordenar-dropdown">
+        <button onclick="ordenarProductos('reciente')">Más recientes</button>
+        <button onclick="ordenarProductos('menor')">Precio: Menor a Mayor</button>
+        <button onclick="ordenarProductos('mayor')">Precio: Mayor a Menor</button>
+    </div>
+</div>
+
         </section>
 
         <section class="product-grid" id="products-container">
