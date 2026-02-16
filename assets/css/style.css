@@ -176,10 +176,13 @@ body {
 /* --- ESTILO DE LOS BOTONES DE FILTRO --- */
 .filter-tabs {
     display: flex;
-    gap: 10px;           /* Espacio pequeño entre ellos */
+    gap: 10px;
     margin-bottom: 25px;
-    justify-content: flex-start;
-    padding-left: 5px;
+    /* Cambiamos esto para asegurar que pegue a la izquierda */
+    justify-content: flex-start; 
+    /* Reducimos o eliminamos el padding para ganar espacio a la izquierda */
+    padding-left: 0px; 
+    width: 100%;
 }
 
 .tab-btn {
