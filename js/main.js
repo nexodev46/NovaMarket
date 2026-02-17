@@ -782,3 +782,6 @@ onAuthStateChanged(auth, (user) => {
         if(textoBienvenida) textoBienvenida.innerText = "BIENVENIDO";
     }
 });
+
+
+
