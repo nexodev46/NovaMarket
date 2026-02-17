@@ -242,8 +242,6 @@ obtenerProductos();
 
 // --- LÓGICA DE SALUDO DINÁMICO ---
 function actualizarSaludo() {
-    // Buscamos el elemento donde dice "BIENVENIDO" o "Mucho Gusto"
-    // Según tu captura es el span debajo de Jhon Kevin
     const saludoElemento = document.querySelector('.user-name span:last-child');
     
     if (saludoElemento) {
@@ -251,14 +249,17 @@ function actualizarSaludo() {
         let mensaje = "";
 
         if (hora >= 6 && hora < 12) {
-            mensaje = "¡Buenos días! ☀️";
+            // Agregamos la clase animar-sol
+            mensaje = '¡Buenos días! <span class="emoji-animado animar-sol">☀️</span>';
         } else if (hora >= 12 && hora < 19) {
-            mensaje = "¡Buenas tardes! ☕";
+            // Agregamos la clase animar-cafe
+            mensaje = '¡Buenas tardes! <span class="emoji-animado animar-cafe">☕</span>';
         } else {
-            mensaje = "¡Buenas noches! 🌙";
+            // Agregamos la clase animar-luna
+            mensaje = '¡Buenas noches! <span class="emoji-animado animar-luna">🌙</span>';
         }
 
-        saludoElemento.innerText = mensaje;
+        saludoElemento.innerHTML = mensaje; // Usar innerHTML para que lea el <span>
     }
 }
 
@@ -668,16 +669,5 @@ window.addEventListener('load', () => {
     // Le damos un pequeño delay de 1 segundo para que la gente vea la animación
     setTimeout(() => {
         loader.classList.add('loader-hidden');
-
-
-
     }, 4000);
-
-
-
-
-    
-
-
 });
-

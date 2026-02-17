@@ -890,7 +890,50 @@ body.dark-mode #loader-wrapper {
     100% { 
         transform: scale(1); 
         filter: drop-shadow(0 0 0px var(--turquesa));
-
-        
     }
 }
+
+
+
+/* Contenedor base para que el emoji no se corte */
+/* Tamaño reducido para que encaje perfecto con el texto */
+.emoji-animado {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 0.9rem !important; /* Lo bajamos de 1.2 a 0.9 */
+    vertical-align: middle; /* Lo alinea mejor con el texto "Buenas tardes" */
+    line-height: 1;
+}
+
+/* --- ANIMACIÓN DEL SOL (Rotación continua) --- */
+.animar-sol {
+    animation: girarSol 5s linear infinite;
+    color: #ffb100;
+}
+
+@keyframes girarSol {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* --- ANIMACIÓN DEL CAFÉ (Salto y vapor) --- */
+.animar-cafe {
+    animation: saltarCafe 2s ease-in-out infinite;
+}
+
+@keyframes saltarCafe {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+/* --- ANIMACIÓN DE LA LUNA (Balanceo) --- */
+.animar-luna {
+    animation: balancearLuna 3s ease-in-out infinite;
+}
+
+@keyframes balancearLuna {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+}
+
+
