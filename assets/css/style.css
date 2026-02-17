@@ -893,3 +893,42 @@ body.dark-mode #loader-wrapper {
     }
 }
 
+
+
+
+/* El fondo de toda la pantalla */
+#auth-modal {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Un degradado suave pro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* El contenedor del formulario */
+#auth-modal .cart-modal-content {
+    background: white;
+    width: 100%;
+    max-width: 420px; /* Tamaño ideal para que se vea ordenado */
+    height: auto; /* Que no ocupe todo el alto, sino lo necesario */
+    padding: 40px;
+    border-radius: 24px; /* Bordes redondeados modernos */
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1); /* Una sombra suave para que "flote" */
+    text-align: center;
+}
+
+/* Ajuste de los inputs para que se vean uniformes */
+.auth-form input {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+}
+
+.auth-form input:focus {
+    border-color: var(--turquesa);
+    box-shadow: 0 0 0 3px rgba(0, 206, 201, 0.1);
+    outline: none;
+}
