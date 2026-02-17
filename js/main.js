@@ -657,63 +657,27 @@ window.salirDeLaTienda = function() {
     }
 };
 
+// 3. ¡IMPORTANTE! Asegúrate de llamar a actualizarAlmacenamiento() 
+// dentro de tus funciones donde agregas o quitas productos del carrito.
 
 
 
 window.addEventListener('load', () => {
     const loader = document.getElementById('loader-wrapper');
-    const displayNombre = document.getElementById('nombre-usuario-display');
-    const displaySaludo = document.getElementById('saludo-dinamico');
-    const displayEmoji = document.getElementById('emoji-saludo');
-
-    // 1. Detectar la hora y elegir Saludo + Emoji
-    const hora = new Date().getHours();
-    let textoSaludo = "";
-    let emoji = "";
-
-    if (hora >= 6 && hora < 12) {
-        textoSaludo = "¡Buenos días,";
-        emoji = "☀️"; // Sol para la mañana
-    } else if (hora >= 12 && hora < 19) {
-        textoSaludo = "¡Buenas tardes,";
-        emoji = "☕"; // Café para la tarde
-    } else {
-        textoSaludo = "¡Buenas noches,";
-        emoji = "🌙"; // Luna para la noche
-    }
     
-    // Inyectar saludo y emoji en el HTML
-    if (displaySaludo) displaySaludo.innerText = textoSaludo;
-    if (displayEmoji) displayEmoji.innerText = emoji;
-
-    // 2. Gestionar el Nombre del Usuario
-    let nombreGuardado = localStorage.getItem('nombreUsuarioNova');
-
-    if (!nombreGuardado) {
-        nombreGuardado = prompt("¡Bienvenido a NovaMarket! ¿Cómo te llamas?");
-        if (!nombreGuardado || nombreGuardado.trim() === "") nombreGuardado = "Invitado";
-        
-        // Poner la primera letra en Mayúscula y el resto en minúscula
-        nombreGuardado = nombreGuardado.charAt(0).toUpperCase() + nombreGuardado.slice(1).toLowerCase();
-        
-        // Cortar el nombre si es muy largo para no mover el carrito
-        if (nombreGuardado.length > 10) nombreGuardado = nombreGuardado.substring(0, 10) + "..";
-        
-        localStorage.setItem('nombreUsuarioNova', nombreGuardado);
-    }
-
-    // Mostrar el nombre al lado del saludo
-    if (displayNombre) displayNombre.innerText = " " + nombreGuardado;
-
-    // 3. Quitar el loader después de 4 segundos
+    // Le damos un pequeño delay de 1 segundo para que la gente vea la animación
     setTimeout(() => {
         loader.classList.add('loader-hidden');
 
+
+
     }, 4000);
 
+
+
+
     
+
+
 });
-
-
-
 
