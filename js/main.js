@@ -1,17 +1,8 @@
-import { db, auth } from './firebase.js'; // Esta línea está bien
+// 1. Importamos la base de datos y las funciones de Firestore
+import { db } from './firebase.js';
 import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
-// CORRECCIÓN AQUÍ: Quita el "import {" de la línea 4 y usa solo las funciones
-import { 
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, 
-    onAuthStateChanged,
-    signOut 
-} from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-
 const contenedor = document.getElementById('products-container');
-
-
 
 // --- VARIABLES GLOBALES (Solo una vez) --
 let carrito = [];
@@ -25,67 +16,6 @@ const btnAbrirModal = document.querySelector(".cart-container");
 const btnCerrarModal = document.querySelector(".close-modal");
 const listaCarritoUI = document.getElementById("cart-items-list");
 const totalUI = document.getElementById("cart-total-amount");
-
-
-// --- VARIABLES DE AUTENTICACIÓN ---
-const authModal = document.getElementById('auth-modal');
-const authEmail = document.getElementById('auth-email');
-const authPass = document.getElementById('auth-pass');
-const btnAuthMain = document.getElementById('btn-auth-main');
-const authSwitchLink = document.getElementById('auth-switch-link');
-const authTitle = document.getElementById('auth-title');
-const authSwitchText = document.getElementById('auth-switch-text');
-
-let modoRegistro = false; // <--- AQUÍ ESTÁ LA VARIABLE QUE TE FALTABA
-
-// --- LÓGICA DE INTERACCIÓN (BOTONES) ---
-
-// Cambiar entre Login y Registro
-if (authSwitchLink) {
-    authSwitchLink.onclick = (e) => {
-        e.preventDefault();
-        modoRegistro = !modoRegistro;
-        
-        if (modoRegistro) {
-            authTitle.innerText = "Crear Cuenta ";
-            btnAuthMain.innerText = "Registrarse";
-            authSwitchText.innerText = "¿Ya tienes cuenta?";
-            authSwitchLink.innerText = "Ingresa aquí";
-        } else {
-            authTitle.innerText = "Iniciar Sesión ";
-            btnAuthMain.innerText = "Ingresar";
-            authSwitchText.innerText = "¿No tienes cuenta?";
-            authSwitchLink.innerText = "Regístrate aquí";
-        }
-    };
-}
-
-// Enviar datos a Firebase
-if (btnAuthMain) {
-    btnAuthMain.onclick = async () => {
-        const email = authEmail.value;
-        const pass = authPass.value;
-
-        try {
-            if (modoRegistro) {
-                await createUserWithEmailAndPassword(auth, email, pass);
-                alert("¡Cuenta creada! 🎉");
-            } else {
-                await signInWithEmailAndPassword(auth, email, pass);
-                alert("¡Bienvenido! 👋");
-            }
-            authModal.style.display = "none";
-        } catch (error) {
-            alert("Error: " + error.message);
-        }
-    };
-}
-
-
-
-
-
-
 
 // 3. Función principal para cargar productos
 async function obtenerProductos(categoriaSeleccionada = null) {
@@ -141,8 +71,6 @@ async function obtenerProductos(categoriaSeleccionada = null) {
         contenedor.innerHTML = '<p>Hubo un error al cargar los productos. Revisa tu conexión.</p>';
     }
 }
-
-
 
 // --- LÓGICA DE FILTRO ---
 const botonesFiltro = document.querySelectorAll('.tab-btn');
@@ -217,9 +145,10 @@ contenedor.addEventListener('click', (e) => {
                 setTimeout(() => boton.style.backgroundColor = "var(--turquesa)", 200);
             }
         }, 1500);
-
     }
 });
+
+
 
 
 
@@ -536,8 +465,6 @@ document.getElementById("btn-save-delivery").onclick = function() {
 
 
 
-
-
 // --- LÓGICA DEL BOTÓN DATOS ---
 const infoModal = document.getElementById("info-modal");
 
@@ -742,45 +669,8 @@ window.addEventListener('load', () => {
     setTimeout(() => {
         loader.classList.add('loader-hidden');
     }, 4000);
-});
 
-
-
-
-// --- FUNCIÓN PARA SALUDO SEGÚN LA HORA ---
-function obtenerSaludoDinamico() {
-    const hora = new Date().getHours();
-    if (hora >= 6 && hora < 12) return "¡Buenos días! ☀️";
-    if (hora >= 12 && hora < 19) return "¡Buenas tardes! 🌤️";
-    return "¡Buenas noches! 🌙";
-}
-
-// --- VIGILANTE DE SESIÓN ---
-onAuthStateChanged(auth, (user) => {
-    const saludoNombre = document.querySelector('.user-name span'); 
-    const textoBienvenida = document.querySelector('.user-balance small'); // Selecciona el texto "BIENVENIDO"
     
-    if (user) {
-        // Si hay usuario, escondemos el modal automáticamente
-        if(authModal) authModal.style.display = "none";
-        
-        // 1. Ponemos el nombre del usuario limpio (antes del @)
-        const nombreLimpio = user.email.split('@')[0];
-        if(saludoNombre) saludoNombre.innerText = nombreLimpio;
-
-        // 2. CAMBIO DE SALUDO AUTOMÁTICO:
-        // Aquí reemplazamos el texto "BIENVENIDO" por el saludo dinámico
-        if(textoBienvenida) {
-            textoBienvenida.innerText = obtenerSaludoDinamico();
-        }
-
-        console.log("¡Sesión iniciada con éxito! Usuario:", nombreLimpio);
-    } else {
-        // Si no hay nadie, mostramos el modal
-        if(authModal) authModal.style.display = "flex";
-        if(saludoNombre) saludoNombre.innerText = "Invitado";
-        if(textoBienvenida) textoBienvenida.innerText = "BIENVENIDO";
-    }
 });
 
 
