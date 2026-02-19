@@ -1,10 +1,11 @@
-// 1. Importamos las librerías oficiales (Usando la versión 10.8.1 que pusiste)
+// 1. Importamos las librerías oficiales
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
 import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"; // <--- AGREGADO
 
-// 2. Tu configuración (Verificada con tus datos de Firebase)
+// 2. Tu configuración
 const firebaseConfig = {
-  apiKey: "AIzaSyC7C3x0SEisWGunaWXMpZdqztTu3Ll1kTQ",
+  apiKey: "AIzaSyC7C3x0SEisWGunvaWXMpZdqztTu3LlkTQ",
   authDomain: "novamarket-977f8.firebaseapp.com",
   projectId: "novamarket-977f8",
   storageBucket: "novamarket-977f8.firebasestorage.app",
@@ -16,6 +17,6 @@ const firebaseConfig = {
 // 3. Inicializamos la App
 const app = initializeApp(firebaseConfig);
 
-// 4. Exportamos la base de datos para que main.js la pueda usar
+// 4. Exportamos los servicios
 export const db = getFirestore(app);
-
+export const auth = getAuth(app); // <--- AGREGADO

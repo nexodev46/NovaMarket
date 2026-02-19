@@ -1,3 +1,27 @@
+import { auth } from './firebase.js';
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+
+// EL GUARDIÁN: Revisa si el usuario tiene permiso cada vez que carga la página
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        if (user.emailVerified) {
+            console.log("Usuario autorizado:", user.email);
+           
+        } else {
+            // Si está logueado pero NO verificó el correo, lo mandamos fuera
+            window.location.href = "login.html";
+        }
+    } else {
+        // Si no hay nadie logueado, directo al login
+        window.location.href = "login.html";
+    }
+});
+
+
+
+
+
+
 // 1. Importamos la base de datos y las funciones de Firestore
 import { db } from './firebase.js';
 import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
@@ -671,3 +695,6 @@ window.addEventListener('load', () => {
         loader.classList.add('loader-hidden');
     }, 4000);
 });
+
+
+
