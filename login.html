@@ -83,19 +83,33 @@
     <div class="auth-container">
         <div class="logo"><i class="fas fa-shopping-bag"></i> Nova<span>Market</span></div>
 
-        <form id="login-form">
-            <h2 id="auth-title">Crear Cuenta</h2>
-            <div class="input-group">
-                <label>Correo Electrónico</label>
-                <input type="email" id="login-email" placeholder="ejemplo@correo.com" required>
-            </div>
-            <div class="input-group">
-                <label>Contraseña</label>
-                <input type="password" id="login-pass" placeholder="••••••••" required>
-            </div>
-            <button type="submit" class="btn-auth">Ingresar</button>
-            <p class="switch-auth">¿No tienes cuenta? <a href="#" onclick="toggleAuth()">Regístrate aquí</a></p>
-        </form>
+       <form id="login-form">
+    <h2 id="auth-title">Iniciar Sesión</h2>
+    
+    <div class="input-group">
+        <label>Correo Electrónico</label>
+        <input type="email" id="login-email" placeholder="ejemplo@correo.com" required>
+    </div>
+
+    <div class="input-group">
+        <label>Contraseña</label>
+        <input type="password" id="login-pass" placeholder="••••••••" required>
+    </div>
+    
+    <button type="submit" class="btn-auth">Ingresar</button>
+    
+    <div class="switch-auth">
+        <p style="margin-bottom: 10px;">
+            ¿No tienes cuenta? <a href="#" onclick="toggleAuth()">Regístrate aquí</a>
+        </p>
+        
+        <a href="#" id="btn-recuperar" style="color: #72c6d1; font-size: 13px; text-decoration: none; font-weight: 600;">
+            ¿Olvidaste tu contraseña?
+        </a>
+    </div>
+</form>
+
+
 
         <form id="register-form">
             <h2>Crear Cuenta</h2>
@@ -107,6 +121,10 @@
                 <label>Contraseña</label>
                 <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres" required>
             </div>
+           <div class="input-group">
+        <label>Verificar Contraseña</label>
+        <input type="password" id="reg-pass-confirm" placeholder="Repite tu contraseña" required>
+    </div>
             <button type="submit" class="btn-auth">Crear y verificar</button>
             <p class="switch-auth">¿Ya tienes cuenta? <a href="#" onclick="toggleAuth()">Inicia sesión</a></p>
         </form>
