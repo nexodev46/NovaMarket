@@ -24,7 +24,7 @@ if (regForm) {
             await sendEmailVerification(userCredential.user);
             console.log("Correo de verificación enviado.");
             
-            alert("¡Cuenta creada! Revisa tu correo electrónico.");
+            alert("¡Cuenta creada! Revisa tu correo electrónico - Spam.");
             await signOut(auth); 
             location.reload(); 
         } catch (error) {
@@ -54,7 +54,7 @@ if (loginForm) {
                 alert("Acceso concedido. ¡Bienvenido!");
                 window.location.href = "index.html"; 
             } else {
-                alert("Tu correo no ha sido verificado. Revisa tu bandeja de entrada.");
+                alert("Tu correo no ha sido verificado. Revisa tu bandeja de entrada - Spam.");
                 await signOut(auth);
             }
         } catch (error) {

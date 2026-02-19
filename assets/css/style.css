@@ -937,3 +937,28 @@ body.dark-mode #loader-wrapper {
 }
 
 
+.logo span {
+    color: var(--turquesa);
+}
+
+
+
+.input-group input:focus {
+    border-color: var(--turquesa);
+    box-shadow: 0 0 8px rgba(114, 198, 209, 0.3); /* Un resplandor suave */
+    transform: scale(1.01); /* Se agranda un poquito al escribir */
+}
+
+
+
+
+.auth-container {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px); /* Esto crea el efecto de vidrio */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+
+
+
+
