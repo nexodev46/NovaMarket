@@ -1054,120 +1054,85 @@ body.dark-mode #loader-wrapper {
 
 
 
+
+
 /* =========================================================
-   AJUSTES DE ORDEN PARA CELULAR (NovaMarket Mobile)
+   ORDEN TOTAL PARA CELULAR (SIN ELIMINAR ELEMENTOS)
    ========================================================= */
 
 @media (max-width: 480px) {
     
-    /* --- 1. HEADER: Una sola fila limpia --- */
+    /* 1. HEADER: Permitimos que los elementos bajen de nivel si no caben */
     .nav-container {
-        display: flex !important; /* Forzamos flex en lugar de grid */
+        display: flex !important;
+        flex-wrap: wrap !important; /* La clave: permite varias filas */
         justify-content: space-between;
-        align-items: center;
+        gap: 10px;
         padding: 10px 15px !important;
     }
 
-    /* Escondemos lo que ocupa mucho espacio en el header móvil */
-    .search-bar, 
-    .user-profile-info .user-text { 
-        display: none !important; 
-    }
-
+    /* El saludo y la foto ahora bajan a una segunda fila centrada */
     .user-profile-info {
-        background: transparent;
-        border: none;
-        padding: 0;
+        order: 3; /* Lo manda abajo del logo y el carrito */
+        width: 100%; /* Ocupa todo el ancho para estar centrado */
+        justify-content: center;
+        background: #f0f9fa;
+        margin-top: 5px;
     }
 
     .logo {
-        font-size: 1.2rem;
+        order: 1; /* Se queda arriba a la izquierda */
+        font-size: 1.3rem;
     }
 
-    /* --- 2. BANNER: Que no se corte la imagen --- */
-    .hero-section {
-        padding: 15px 10px 80px 10px !important; /* Reducimos espacio */
-        min-height: auto !important;
+    .cart-container {
+        order: 2; /* Se queda arriba a la derecha */
     }
 
-    .promo-banner {
-        height: 180px !important; /* Altura más baja para que quepa en pantalla */
-        border-radius: 25px !important;
-    }
-
-    .banner-text h1 {
-        font-size: 1.2rem !important; /* Texto más pequeño para que no se amontone */
-        padding: 0 10px;
-    }
-
-    /* --- 3. CATEGORÍAS: Scroll lateral suave --- */
-    .categories-grid {
+    /* 2. CATEGORÍAS Y FILTROS: Scroll lateral para que no se amontonen */
+    .categories-grid, .filter-tabs {
+        display: flex !important;
         justify-content: flex-start !important;
-        overflow-x: auto;
-        padding: 10px 15px 20px 15px;
-        margin-top: -45px !important;
+        overflow-x: auto !important; /* Permite deslizar con el dedo */
+        white-space: nowrap;
+        padding: 10px 15px 20px 15px !important;
         scrollbar-width: none;
     }
 
-    .categories-grid::-webkit-scrollbar { display: none; }
-
-    .cat-item {
-        flex: 0 0 80px; /* Tamaño fijo para que no se aplasten */
-        height: 100px;
+    .categories-grid::-webkit-scrollbar, 
+    .filter-tabs::-webkit-scrollbar {
+        display: none; /* Esconde la barra de scroll para que se vea limpio */
     }
 
-    /* --- 4. PRODUCTOS: Diseño de lista clara --- */
+    .cat-item {
+        flex: 0 0 85px; /* Evita que se aplasten los círculos */
+    }
+
+    /* 3. PRODUCTOS: Imagen y texto uno al lado del otro pero con espacio */
     .product-grid {
-        grid-template-columns: 1fr !important; /* Un producto por fila */
-        gap: 15px !important;
-        padding: 0 15px !important;
+        grid-template-columns: 1fr !important; /* Una tarjeta por fila */
+        padding: 0 10px !important;
     }
 
     .product-card {
-        flex-direction: row !important; /* Imagen izquierda, texto derecha */
-        padding: 12px !important;
-        border-radius: 25px !important;
+        padding: 15px !important;
         gap: 15px !important;
+        align-items: center;
     }
 
     .product-image-container {
-        width: 100px !important; /* Imagen más pequeña en móvil */
-        height: 100px !important;
-        margin: 0 !important;
+        width: 120px !important; /* Tamaño fijo para la imagen */
+        height: 120px !important;
+        flex-shrink: 0; /* Que no se haga chiquita */
     }
 
     .product-info h4 {
-        font-size: 1rem !important;
+        font-size: 1.1rem !important;
     }
 
-    .product-description {
-        display: none; /* Escondemos descripción en móvil para ganar orden */
-    }
-
-    /* --- 5. MODALES (Carrito/Favoritos) --- */
-    .cart-modal-content {
-        width: 100% !important;
-        margin: 0 !important;
-        position: fixed;
-        bottom: 0;
-        border-radius: 30px 30px 0 0 !important;
-        max-height: 85vh;
-    }
-}
-
-
-
-
-
-@media (max-width: 480px) {
-    .filter-section {
-        flex-direction: column !important;
-        align-items: stretch !important;
-        margin: 20px auto 0 auto !important;
-    }
-
-    .menu-search-box {
-        width: 100% !important;
-        margin-bottom: 10px;
+    /* Aseguramos que el botón de añadir y el precio no choquen */
+    .price-row {
+        flex-wrap: wrap;
+        gap: 10px;
     }
 }
