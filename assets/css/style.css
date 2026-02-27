@@ -1056,74 +1056,74 @@ body.dark-mode #loader-wrapper {
 
 
 
-
 /* =========================================================
-   ORDEN TOTAL PARA CELULAR (SIN ELIMINAR ELEMENTOS)
-   ========================================================= */
-/* =========================================================
-   ADAPTACIÓN MÓVIL (SOLO CSS - SIN TOCAR HTML)
+   ESTRUCTURA MÓVIL TOTAL (SIN ESPACIOS SOBRANTES)
    ========================================================= */
 
 @media (max-width: 480px) {
-    /* 1. Forzamos al contenedor a ser una columna para apilar niveles */
+    /* 1. Eliminamos el espacio entre el navegador y el contenido */
+    .top-nav {
+        padding: 5px 0 !important;
+        margin: 0 !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
     .nav-container {
         display: flex !important;
         flex-direction: column !important;
-        padding: 10px 15px !important;
-        gap: 8px !important;
+        padding: 5px 15px !important;
+        gap: 5px !important; /* Espacio mínimo entre elementos */
     }
 
-    /* 2. NIVEL 1: Logo y Carrito en la misma fila */
-    /* Usamos flexbox para separarlos a los extremos */
+    /* 2. NIVEL 1: Logo y Carrito pegados arriba */
     .logo {
-        display: inline-block;
-        width: auto;
-    }
-
-    .cart-container {
-        position: absolute !important; /* Lo fijamos a la derecha del header */
-        top: 15px;
-        right: 15px;
+        font-size: 1.3rem !important;
         margin: 0 !important;
     }
 
-    /* 3. NIVEL 2: El Saludo debajo del Logo */
+    .cart-container {
+        position: absolute !important;
+        top: 10px;
+        right: 15px;
+    }
+
+    /* 3. NIVEL 2: Saludo pegado justo debajo del logo */
     .user-nav {
         display: flex !important;
-        flex-direction: column !important;
-        align-items: flex-start !important; /* Alineado a la izquierda bajo el nombre */
         width: 100% !important;
-        margin-top: 5px;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
     .user-profile-info {
         width: 100% !important;
-        justify-content: flex-start !important;
-        background: rgba(248, 249, 250, 0.9) !important; /* Efecto limpio */
-        border-radius: 15px !important;
-        padding: 5px 12px !important;
+        margin: 0 !important;
+        padding: 5px 10px !important;
+        background: rgba(240, 249, 250, 0.7) !important;
+        border: none !important;
     }
 
-    /* 4. NIVEL 3: El Buscador debajo de todo */
-    .search-bar {
-        display: flex !important;
-        width: 100% !important;
-        margin: 5px 0 0 0 !important;
-        order: 10; /* Se asegura de ir al final */
+    /* 4. NIVEL 3: Buscador (si existe arriba) sin espacios */
+    .top-nav .search-bar {
+        display: none !important; /* Sugiero mantener solo el de abajo para evitar huecos */
     }
 
-    /* --- AJUSTE DE LA PORTADA (BANNER) --- */
+    /* 5. PORTADA (BANNER): Ajuste para eliminar el hueco superior */
     .hero-section {
-        padding: 15px 10px 60px 10px !important;
+        margin-top: 0 !important; /* Pegamos el banner al header */
+        padding: 10px 15px 70px 15px !important; /* Reducimos el colchón superior */
+        min-height: auto !important;
     }
 
     .promo-banner {
-        height: 200px !important; /* Altura ideal para celular */
-        border-radius: 30px !important;
+        height: 180px !important; /* Ajuste para que no ocupe toda la pantalla */
+        margin-top: 0 !important;
+        border-radius: 25px !important;
     }
 
-    .banner-text h1 {
-        font-size: 1.5rem !important; /* Texto legible sin desbordar */
-        line-height: 1.2;
+    /* 6. CATEGORÍAS: Subimos un poco para que monten sobre el banner */
+    .categories-grid {
+        margin-top: -55px !important; 
+        padding-bottom: 10px !important;
     }
 }
