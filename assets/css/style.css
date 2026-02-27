@@ -1056,55 +1056,74 @@ body.dark-mode #loader-wrapper {
 
 
 
+
 /* =========================================================
    ORDEN TOTAL PARA CELULAR (SIN ELIMINAR ELEMENTOS)
    ========================================================= */
+/* =========================================================
+   ADAPTACIÓN MÓVIL (SOLO CSS - SIN TOCAR HTML)
+   ========================================================= */
 
 @media (max-width: 480px) {
-    /* 1. Forzamos que el contenedor sea una columna para apilar los niveles */
+    /* 1. Forzamos al contenedor a ser una columna para apilar niveles */
     .nav-container {
         display: flex !important;
         flex-direction: column !important;
         padding: 10px 15px !important;
-        gap: 12px; /* Espacio entre cada nivel */
+        gap: 8px !important;
     }
 
-    /* NIVEL 1: Logo y Carrito en la misma línea */
-    .header-top-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        order: 1;
+    /* 2. NIVEL 1: Logo y Carrito en la misma fila */
+    /* Usamos flexbox para separarlos a los extremos */
+    .logo {
+        display: inline-block;
+        width: auto;
     }
-    
-    .logo { font-size: 1.4rem !important; }
-    .cart-container { margin: 0 !important; }
 
-    /* NIVEL 2: Saludo (ahora debajo del logo) */
+    .cart-container {
+        position: absolute !important; /* Lo fijamos a la derecha del header */
+        top: 15px;
+        right: 15px;
+        margin: 0 !important;
+    }
+
+    /* 3. NIVEL 2: El Saludo debajo del Logo */
+    .user-nav {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: flex-start !important; /* Alineado a la izquierda bajo el nombre */
+        width: 100% !important;
+        margin-top: 5px;
+    }
+
     .user-profile-info {
+        width: 100% !important;
+        justify-content: flex-start !important;
+        background: rgba(248, 249, 250, 0.9) !important; /* Efecto limpio */
+        border-radius: 15px !important;
+        padding: 5px 12px !important;
+    }
+
+    /* 4. NIVEL 3: El Buscador debajo de todo */
+    .search-bar {
         display: flex !important;
         width: 100% !important;
-        order: 2; /* Segundo lugar */
-        background: #f8f9fa;
-        justify-content: flex-start;
-        padding: 8px 15px !important;
-        border-radius: 20px;
-    }
-    
-    .user-text { display: block !important; } /* Asegura que no desaparezca */
-
-    /* NIVEL 3: Buscador (al final de la cabecera) */
-    .search-bar {
-        display: flex !important; /* Lo devolvemos a la vida */
-        width: 100% !important;
-        margin: 0 !important;
-        order: 3; /* Tercer lugar */
-        padding: 10px 20px !important;
+        margin: 5px 0 0 0 !important;
+        order: 10; /* Se asegura de ir al final */
     }
 
-    /* Ajuste de la Portada (Banner) para que no choque con el buscador */
+    /* --- AJUSTE DE LA PORTADA (BANNER) --- */
     .hero-section {
-        padding-top: 20px !important;
+        padding: 15px 10px 60px 10px !important;
+    }
+
+    .promo-banner {
+        height: 200px !important; /* Altura ideal para celular */
+        border-radius: 30px !important;
+    }
+
+    .banner-text h1 {
+        font-size: 1.5rem !important; /* Texto legible sin desbordar */
+        line-height: 1.2;
     }
 }
