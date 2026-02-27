@@ -1197,44 +1197,45 @@ body.dark-mode #loader-wrapper {
 
 
 
-
-/* Aseguramos que el contenedor de filtros sea una fila limpia */
+/* 1. Mantiene todo en una sola fila y da espacio para el texto de arriba */
 .filter-section {
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important; /* Fuerza la fila */
     justify-content: space-between;
-    align-items: center; /* Alineación perfecta con el buscador */
-    margin-top: 45px !important; /* Espacio extra para que el título no choque arriba */
+    align-items: center; /* Alinea el buscador con los botones */
+    margin-top: 50px !important;
     position: relative;
+    flex-wrap: nowrap !important; /* Evita que el buscador se baje en el celular */
 }
 
-/* Contenedor de botones como punto de referencia */
-.filter-tabs {
-    position: relative; /* Muy importante */
+/* 2. Contenedor de botones (Punto de referencia) */
+.filter-left-side {
+    position: relative;
     display: flex;
-    gap: 10px;
 }
 
-/* El subtítulo que NO ocupa espacio físico */
-.label-superior {
+/* 3. El Subtítulo: "Flota" sobre los botones sin ocupar espacio */
+.filter-label {
     position: absolute;
-    top: -25px; /* Lo sube exactamente sobre los botones */
+    top: -22px; /* Lo sube */
     left: 5px;
     font-size: 10px;
-    color: #a0a0a0;
+    color: #999;
     font-weight: 600;
     text-transform: uppercase;
-    white-space: nowrap; /* Evita que el texto salte de línea */
+    white-space: nowrap;
     pointer-events: none;
 }
 
-/* Ajuste para que en el móvil siga siendo adaptable */
+/* 4. Ajuste para móvil: Evita que el buscador desaparezca */
 @media (max-width: 480px) {
-    .filter-section {
-        flex-direction: column;
-        gap: 25px;
+    .filter-tabs {
+        overflow-x: auto; /* Si no caben los botones, se deslizan */
+        max-width: 140px; /* Limita el ancho para dejarle espacio al buscador */
+        white-space: nowrap;
     }
-    .label-superior {
-        left: 50%;
-        transform: translateX(-50%);
+    
+    .menu-search-box input {
+        width: 100px !important; /* Hace el buscador más pequeño en celular */
     }
 }

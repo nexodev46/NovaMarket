@@ -64,47 +64,42 @@
        
 
         <section class="filter-section">
-            <div class="filter-tabs">
+    <div class="filter-left-side">
+        <span class="filter-label">Explorar por categoría</span>
+        <div class="filter-tabs">
+            <button class="tab-btn active">Ropa</button>
+            <button class="tab-btn">Calzado</button>
+            <button class="tab-btn">Tegnologia</button>
+            <button class="tab-btn">Otros</button>
+            <button class="tab-btn">Sali</button>
+        </div>
+    </div>
 
-               <span class="label-superior">Explorar por categoría</span>
-
-
-                <button class="tab-btn active">Ropa</button>
-                <button class="tab-btn">Calzado</button>
-                <button class="tab-btn">Tegnologia</button>
-                <button class="tab-btn">Otros</button>
-                <button class="tab-btn">Sali</button>
+    <div class="menu-search-container">
+        <div class="menu-search-box">
+            <input type="text" placeholder="Buscar Productos">
+            <i class="fas fa-search" style="color: #ccc;"></i>
+        </div>
+        
+        <div style="position: relative; display: flex; gap: 10px; align-items: center;"> 
+            <div id="btn-dark-mode" class="filter-icon-btn" style="background: var(--gris-oscuro);">
+                <i class="fas fa-moon"></i>
             </div>
-
-            <div class="menu-search-container">
-                <div class="menu-search-box">
-                    <input type="text" placeholder="Buscar Productos">
-                    <i class="fas fa-search" style="color: #ccc;"></i>
-                </div>
-                
-               <div style="position: relative; display: flex; gap: 10px; align-items: center;"> 
-    <div id="btn-dark-mode" class="filter-icon-btn" style="background: var(--gris-oscuro);">
-        <i class="fas fa-moon"></i>
+            <div class="filter-icon-btn" id="btn-ordenar">
+                <i class="fas fa-sliders-h"></i>
+            </div>
+            <div id="dropdown-ordenar" class="ordenar-dropdown">
+                <button onclick="ordenarProductos('reciente')">Más recientes</button>
+                <button onclick="ordenarProductos('menor')">Precio: Menor a Mayor</button>
+                <button onclick="ordenarProductos('mayor')">Precio: Mayor a Menor</button>
+                <button onclick="salirDeLaTienda()" style="color: #ff4d4d; border-top: 1px solid #eee; font-weight: bold;">
+                    <i class="fas fa-sign-out-alt"></i> Salir de la tienda
+                </button>
+            </div>
+        </div>
     </div>
+</section>
 
-    <div class="filter-icon-btn" id="btn-ordenar">
-        <i class="fas fa-sliders-h"></i>
-    </div>
-
-    <div id="dropdown-ordenar" class="ordenar-dropdown">
-        <button onclick="ordenarProductos('reciente')">Más recientes</button>
-        <button onclick="ordenarProductos('menor')">Precio: Menor a Mayor</button>
-        <button onclick="ordenarProductos('mayor')">Precio: Mayor a Menor</button>
-        <button onclick="salirDeLaTienda()" style="color: #ff4d4d; border-top: 1px solid #eee; font-weight: bold;">
-        <i class="fas fa-sign-out-alt"></i> Salir de la tienda
-    </button>
-
-
-
-    </div>
-</div>
-
-        </section>
 
         <section class="product-grid" id="products-container">
             </section>
