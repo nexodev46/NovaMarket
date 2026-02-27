@@ -1151,3 +1151,48 @@ body.dark-mode #loader-wrapper {
         height: 120px !important;
     }
 }
+
+
+
+
+
+/* =========================================================
+   CORRECCIÓN DE IMÁGENES CORTADAS EN MÓVIL
+   ========================================================= */
+
+@media (max-width: 480px) {
+    /* 1. Ajustamos el contenedor para que no sea tan alto y no corte */
+    .product-image-container {
+        width: 130px !important;  /* Tamaño un poco más compacto para que quepa todo */
+        height: 130px !important;
+        margin: 5px !important;
+        background-color: #f9f9f9 !important; /* Fondo suave para que resalte el producto */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        overflow: visible !important; /* Evita que se corte el producto */
+    }
+
+    /* 2. Forzamos a la imagen a adaptarse al espacio sin deformarse */
+    .slide-img {
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important; /* ESTO ES CLAVE: Muestra el producto completo */
+        padding: 5px !important; /* Un pequeño aire para que no toque los bordes */
+    }
+
+    /* 3. Ajuste de la tarjeta para dar más espacio a la info */
+    .product-card {
+        padding: 10px !important;
+        gap: 10px !important;
+        align-items: center !important;
+    }
+
+    /* 4. Botones del slider (Flechas) más pequeñas para no tapar el producto */
+    .slider-btn {
+        width: 24px !important;
+        height: 24px !important;
+        font-size: 10px !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+    }
+}
