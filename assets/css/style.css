@@ -1152,10 +1152,6 @@ body.dark-mode #loader-wrapper {
     }
 }
 
-
-
-
-
 /* =========================================================
    CORRECCIÓN DE IMÁGENES CORTADAS EN MÓVIL
    ========================================================= */
@@ -1200,3 +1196,45 @@ body.dark-mode #loader-wrapper {
 
 
 
+
+
+/* Aseguramos que el contenedor de filtros sea una fila limpia */
+.filter-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Alineación perfecta con el buscador */
+    margin-top: 45px !important; /* Espacio extra para que el título no choque arriba */
+    position: relative;
+}
+
+/* Contenedor de botones como punto de referencia */
+.filter-tabs {
+    position: relative; /* Muy importante */
+    display: flex;
+    gap: 10px;
+}
+
+/* El subtítulo que NO ocupa espacio físico */
+.label-superior {
+    position: absolute;
+    top: -25px; /* Lo sube exactamente sobre los botones */
+    left: 5px;
+    font-size: 10px;
+    color: #a0a0a0;
+    font-weight: 600;
+    text-transform: uppercase;
+    white-space: nowrap; /* Evita que el texto salte de línea */
+    pointer-events: none;
+}
+
+/* Ajuste para que en el móvil siga siendo adaptable */
+@media (max-width: 480px) {
+    .filter-section {
+        flex-direction: column;
+        gap: 25px;
+    }
+    .label-superior {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
