@@ -97,7 +97,7 @@ body {
 .promo-banner {
     max-width: 1100px;
     width: 100%;
-    height: 320px;
+    height: 700px;
     border-radius: 45px;
     overflow: hidden;
     position: relative;
@@ -1111,21 +1111,21 @@ body.dark-mode #loader-wrapper {
 
     /* 5. PORTADA / BANNER: Ajuste de posición */
     .hero-section {
-        padding: 10px 0 80px 0 !important;
+        padding: 10px 0 100px 0 !important;
         width: 100% !important;
         margin: 0 !important;
     }
 
     .promo-banner {
-        width: 92% !important;
+        width: 94% !important;
         margin: 0 auto !important;
-        height: 190px !important;
-        border-radius: 25px !important;
+        height: 350px !important;
+        border-radius: 30px !important;
     }
 
     .banner-text h1 {
-        font-size: 1.4rem !important; /* Tamaño legible en móvil */
-        padding: 0 15px;
+        font-size: 2rem !important; /* Tamaño legible en móvil */
+        padding: 0 20px;
     }
 
     /* 6. CATEGORÍAS Y PRODUCTOS: Ajuste de ancho */
@@ -1196,3 +1196,7 @@ body.dark-mode #loader-wrapper {
         background: rgba(255, 255, 255, 0.9) !important;
     }
 }
+
+
+
+
