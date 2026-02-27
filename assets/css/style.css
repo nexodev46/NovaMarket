@@ -1056,78 +1056,98 @@ body.dark-mode #loader-wrapper {
 
 
 
+
 /* =========================================================
-   ORDEN TOTAL: ELIMINACIÓN DE VACÍOS Y ANCHO COMPLETO
+   ORDEN TOTAL: ELIMINACIÓN DE VACÍOS Y AJUSTE DE PORTADA
    ========================================================= */
 
 @media (max-width: 480px) {
-    /* 1. Forzamos a que el contenedor principal use todo el ancho real */
-    .top-nav, .nav-container, .hero-section {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        box-sizing: border-box !important;
+    /* 1. Forzamos el ancho total real eliminando desbordes */
+    html, body {
+        overflow-x: hidden; /* Vital para eliminar el vacío lateral */
+        width: 100%;
     }
 
-    /* 2. HEADER: Distribución simétrica */
+    .top-nav {
+        width: 100% !important;
+        padding: 5px 0 !important;
+    }
+
+    /* 2. Reestructuramos el contenedor para apilar elementos */
     .nav-container {
         display: flex !important;
-        flex-direction: column !important;
+        flex-direction: column !important; /* Apila niveles verticalmente */
+        width: 100% !important;
         padding: 10px 15px !important;
+        grid-template-columns: none !important; /* Desactiva el grid de escritorio */
         gap: 10px !important;
     }
 
-    /* Fila superior: Logo y Carrito (Ahora ocupan los extremos reales) */
+    /* 3. NIVEL 1: Logo a la izquierda y Carrito a la derecha */
+    /* Creamos una fila interna para ellos */
     .header-top-row {
         display: flex !important;
+        width: 100% !important;
         justify-content: space-between !important;
         align-items: center !important;
-        width: 100% !important;
     }
 
-    /* 3. SALUDO: Estirado al ancho completo para que no quede hueco */
+    /* 4. NIVEL 2: El Saludo (DEBAJO del logo Nova Market) */
+    .user-nav {
+        width: 100% !important;
+        justify-content: flex-start !important; /* Alineado al inicio como el título */
+        margin: 0 !important;
+    }
+
     .user-profile-info {
+        width: 100% !important; /* Ocupa todo el ancho para no dejar huecos */
         display: flex !important;
-        width: 100% !important; /* Esto elimina el vacío a la derecha del saludo */
-        justify-content: space-between !important;
-        align-items: center !important;
+        justify-content: space-between !important; /* Mantiene foto y saludo en extremos de su burbuja */
         background: rgba(240, 249, 250, 0.8) !important;
-        padding: 8px 15px !important;
-        border-radius: 20px !important;
+        padding: 8px 12px !important;
+        border-radius: 15px !important;
         box-sizing: border-box !important;
     }
 
-    /* 4. BANNER: Eliminamos bordes blancos laterales */
+    /* 5. PORTADA / BANNER: Ajuste de posición */
     .hero-section {
-        padding: 10px 0 !important; /* Quitamos padding lateral para que el banner respire */
+        padding: 10px 0 80px 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
     }
 
     .promo-banner {
-        width: 92% !important; /* Centrado con un pequeño margen estético */
+        width: 92% !important;
         margin: 0 auto !important;
-        height: 180px !important;
+        height: 190px !important;
+        border-radius: 25px !important;
     }
 
-    /* 5. CATEGORÍAS: Aseguramos que el scroll no deje huecos */
+    .banner-text h1 {
+        font-size: 1.4rem !important; /* Tamaño legible en móvil */
+        padding: 0 15px;
+    }
+
+    /* 6. CATEGORÍAS Y PRODUCTOS: Ajuste de ancho */
     .categories-grid {
-        display: flex !important;
-        width: 100% !important;
-        justify-content: flex-start !important;
-        overflow-x: auto !important;
-        padding: 10px 15px 25px !important;
         margin-top: -50px !important;
+        padding: 10px 15px 25px 15px !important;
     }
 
-    /* 6. BUSCADOR DE ABAJO: Centrado total */
-    .filter-section {
+    .product-grid {
+        grid-template-columns: 1fr !important; /* Una sola columna en móvil */
+        gap: 20px !important;
         width: 100% !important;
         padding: 0 15px !important;
-        box-sizing: border-box !important;
     }
 
-    .menu-search-box {
-        width: 100% !important; /* El buscador ahora usa todo el ancho disponible */
-        margin: 0 !important;
+    .product-card {
+        padding: 15px !important;
+        border-radius: 25px !important;
+    }
+
+    .product-image-container {
+        width: 120px !important; /* Más pequeño para que no empuje el texto */
+        height: 120px !important;
     }
 }
