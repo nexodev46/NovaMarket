@@ -63,32 +63,63 @@ async function obtenerProductos(categoriaSeleccionada = null) {
             return;
         }
 
-        querySnapshot.forEach((doc) => {
-            const datos = doc.data();
-            const nombreFinal = datos.nombre || datos.Nombre || "Producto sin nombre";
-            const precioFinal = datos.precio || datos.Precio || "0.00";
-            const imagenFinal = datos.imagen || datos.Imagen || "https://via.placeholder.com/150";
-            
-            // Dentro del forEach de querySnapshot
+        
 
-            contenedor.innerHTML += `
-            <article class="product-card">
-                <img src="${imagenFinal}" alt="${nombreFinal}">
-                <div class="product-info">
-                    <i class="far fa-heart" style="float: right; color: var(--turquesa); cursor: pointer;"></i>
-                    <h4>${nombreFinal}</h4>
-                    <div class="sizes">
-                        <span class="size-chip">M</span> 
-                        <span class="size-chip">L</span>
-                    </div>
-                    <div class="price-row">
-                        <span class="price-tag">$${precioFinal}</span>
-                        <button class="add-btn"><i class="fas fa-shopping-cart"></i></button>
-                    </div>
-                </div>
-            </article>
-            `;
+
+        querySnapshot.forEach((doc) => {
+    const datos = doc.data();
+    const nombreFinal = datos.nombre || datos.Nombre || "Producto";
+    const precioFinal = datos.precio || datos.Precio || "0.00";
+    
+    // Lógica de imágenes
+    let galeria = [];
+    if (Array.isArray(datos.imagenes)) {
+        galeria = datos.imagenes.filter(img => typeof img === 'string' && img.includes('http'));
+    } else {
+        galeria = [datos.imagen || datos.Imagen || "img/perfil.png"];
+    }
+
+    // Generar el HTML de las imágenes
+    const fotosHTML = galeria.map(url => `
+        <img src="${url.trim()}" class="slide-img">
+    `).join('');
+
+    // Si hay más de una imagen, mostramos las flechas
+// Dentro de tu función donde generas el HTML del producto:
+const botonesSlider = galeria.length > 1 ? `
+    <button class="slider-btn prev" onclick="this.parentElement.querySelector('.image-slider').scrollBy({left: -this.parentElement.offsetWidth, behavior: 'smooth'})">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+    <button class="slider-btn next" onclick="this.parentElement.querySelector('.image-slider').scrollBy({left: this.parentElement.offsetWidth, behavior: 'smooth'})">
+        <i class="fas fa-chevron-right"></i>
+    </button>
+` : '';
+
+   contenedor.innerHTML += `
+   <article class="product-card">
+        <div class="product-image-container">
+            <div class="image-slider">
+                ${fotosHTML}
+            </div>
+            ${botonesSlider}
+        </div>
+        <div class="product-info">
+            <i class="far fa-heart ${favoritos.includes(nombreFinal) ? 'active' : ''}" style="float: right; color: var(--turquesa); cursor: pointer;"></i>
+            <h4>${nombreFinal}</h4>
+            
+            <p class="product-description">${datos.descripcion || 'Sin descripción disponible'}</p>
+            
+            <div class="price-row">
+                <span class="price-tag">$${precioFinal}</span>
+                <button class="add-btn"><i class="fas fa-shopping-cart"></i></button>
+            </div>
+        </div>
+    </article>
+    `;
+
         });
+
+
 
     } catch (error) {
         console.error("Error al obtener productos:", error);
@@ -144,6 +175,7 @@ contenedor.addEventListener('click', (e) => {
         }, 1500);
 
         carrito.push(producto);
+        actualizarAlmacenamiento();
 
         // --- INICIO DE LA ANIMACIÓN DEL BADGE ---
         if(cartBadge) {
@@ -551,7 +583,7 @@ async function dibujarPromociones() {
         }
 
 
-        querySnapshot.forEach((doc) => {
+    querySnapshot.forEach((doc) => {
             const prod = doc.data();
             listaPromoUI.innerHTML += `
                 <div class="cart-item-row" style="border-left: 4px solid #ff4757; margin-bottom: 10px; padding-left: 10px;">
@@ -566,6 +598,8 @@ async function dibujarPromociones() {
                 </div>
             `;
         });
+
+
     } catch (error) {
         console.error("Error al cargar promos:", error);
     }
