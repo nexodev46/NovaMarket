@@ -1061,78 +1061,50 @@ body.dark-mode #loader-wrapper {
    ========================================================= */
 
 @media (max-width: 480px) {
-    
-    /* 1. HEADER: Permitimos que los elementos bajen de nivel si no caben */
+    /* 1. Forzamos que el contenedor sea una columna para apilar los niveles */
     .nav-container {
         display: flex !important;
-        flex-wrap: wrap !important; /* La clave: permite varias filas */
-        justify-content: space-between;
-        gap: 10px;
+        flex-direction: column !important;
         padding: 10px 15px !important;
+        gap: 12px; /* Espacio entre cada nivel */
     }
 
-    /* El saludo y la foto ahora bajan a una segunda fila centrada */
-    .user-profile-info {
-        order: 3; /* Lo manda abajo del logo y el carrito */
-        width: 100%; /* Ocupa todo el ancho para estar centrado */
-        justify-content: center;
-        background: #f0f9fa;
-        margin-top: 5px;
-    }
-
-    .logo {
-        order: 1; /* Se queda arriba a la izquierda */
-        font-size: 1.3rem;
-    }
-
-    .cart-container {
-        order: 2; /* Se queda arriba a la derecha */
-    }
-
-    /* 2. CATEGORÍAS Y FILTROS: Scroll lateral para que no se amontonen */
-    .categories-grid, .filter-tabs {
-        display: flex !important;
-        justify-content: flex-start !important;
-        overflow-x: auto !important; /* Permite deslizar con el dedo */
-        white-space: nowrap;
-        padding: 10px 15px 20px 15px !important;
-        scrollbar-width: none;
-    }
-
-    .categories-grid::-webkit-scrollbar, 
-    .filter-tabs::-webkit-scrollbar {
-        display: none; /* Esconde la barra de scroll para que se vea limpio */
-    }
-
-    .cat-item {
-        flex: 0 0 85px; /* Evita que se aplasten los círculos */
-    }
-
-    /* 3. PRODUCTOS: Imagen y texto uno al lado del otro pero con espacio */
-    .product-grid {
-        grid-template-columns: 1fr !important; /* Una tarjeta por fila */
-        padding: 0 10px !important;
-    }
-
-    .product-card {
-        padding: 15px !important;
-        gap: 15px !important;
+    /* NIVEL 1: Logo y Carrito en la misma línea */
+    .header-top-row {
+        display: flex;
+        justify-content: space-between;
         align-items: center;
+        width: 100%;
+        order: 1;
+    }
+    
+    .logo { font-size: 1.4rem !important; }
+    .cart-container { margin: 0 !important; }
+
+    /* NIVEL 2: Saludo (ahora debajo del logo) */
+    .user-profile-info {
+        display: flex !important;
+        width: 100% !important;
+        order: 2; /* Segundo lugar */
+        background: #f8f9fa;
+        justify-content: flex-start;
+        padding: 8px 15px !important;
+        border-radius: 20px;
+    }
+    
+    .user-text { display: block !important; } /* Asegura que no desaparezca */
+
+    /* NIVEL 3: Buscador (al final de la cabecera) */
+    .search-bar {
+        display: flex !important; /* Lo devolvemos a la vida */
+        width: 100% !important;
+        margin: 0 !important;
+        order: 3; /* Tercer lugar */
+        padding: 10px 20px !important;
     }
 
-    .product-image-container {
-        width: 120px !important; /* Tamaño fijo para la imagen */
-        height: 120px !important;
-        flex-shrink: 0; /* Que no se haga chiquita */
-    }
-
-    .product-info h4 {
-        font-size: 1.1rem !important;
-    }
-
-    /* Aseguramos que el botón de añadir y el precio no choquen */
-    .price-row {
-        flex-wrap: wrap;
-        gap: 10px;
+    /* Ajuste de la Portada (Banner) para que no choque con el buscador */
+    .hero-section {
+        padding-top: 20px !important;
     }
 }
